@@ -1,32 +1,19 @@
-<?php 
-    include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
-?>
 <html>
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/index.css">
+        <link rel="stylesheet" href="/style/instruction.css">
         <title>대회 방법</title>
     </head>
     <body>
         <div class="top_nav">
-            <?php 
-                echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/top_nav_left.html");
-
-                if($signed){
-                    echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/top_nav_right_signed.html");
-                }
-                else{
-                    echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/top_nav_right_none_signed.html");
-                }
+            <?php
+                include($_SERVER['DOCUMENT_ROOT']."/template/top_nav.php");
             ?>
         </div>
         <div class="description">
-            <div class="function">
-                <img src="./media/main-banner.jpg" alt="심영과 상하이조의 짜릿한 한판승부!(두둥)">
-            </div>
             <div class="plain-description">
-                <h4>최근 공지사항(5개)</h4>
+                <h3>대회 진행방법</h3>
             </div>
         </div>
     </body>
