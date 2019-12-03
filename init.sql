@@ -3,7 +3,7 @@ USE gukwon_ctf;
 
 CREATE TABLE user_info(
     id TEXT NOT NULL,
-    pwd TEXT NOT NULL,
+    pwd_hash TEXT NOT NULL,
     nickname TEXT NOT NULL,
     stdid INT NOT NULL,
     score TEXT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE user_info(
 CREATE TABLE auth_code(
     code VARCHAR(7) NOT NULL,
     stdid INT NOT NULL
-)
+);
 
 CREATE TABLE problem(
     idx INT NOT NULL,

@@ -61,5 +61,25 @@ body{
 }
 
 .description{
+    max-width:1400px;
+
     margin:15px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-bottom:100px;
+}
+
+.description .plain-description{
+    max-width:1250px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.description .row-wrap{
+    padding-bottom:75px;
+    border-bottom:1px solid #D1D1D1;
+}
+
+.description .row-wrap p{
+    margin-left:15px;
 }
