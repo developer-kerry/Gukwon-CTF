@@ -11,8 +11,9 @@ CREATE TABLE user_info(
 );
 
 CREATE TABLE auth_code(
+    stdid INT NOT NULL PRIMARY KEY,
     code VARCHAR(7) NOT NULL,
-    stdid INT NOT NULL
+    root BOOLEAN NOT NULL
 );
 
 CREATE TABLE problem(

@@ -8,6 +8,7 @@
     $result = mysqli_fetch_assoc(mysqli_query($conn, $sql));
 
     if($result['cnt'] == 1 && password_verify($pwd, $result['pwd_hash'])){
+        session_destroy();
         session_start();
         $_SESSION['id'] = $id;
         $_SESSION['pwd_hash'] = $result['pwd_hash'];
@@ -17,6 +18,7 @@
         header("Location:$location");
     }
     else{
+        session_destroy();
         echo "<script>alert('로그인 정보가 틀립니다.');history.back();</script>";
     }
 ?>
