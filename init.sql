@@ -10,6 +10,12 @@ CREATE TABLE user_info(
     root BOOLEAN NOT NULL
 );
 
+CREATE TABLE access_token(
+    token TEXT NOT NULL,
+    nickname TEXT NOT NULL,
+    expire_datetime DATETIME NOT NULL
+);
+
 CREATE TABLE auth_code(
     stdid INT NOT NULL PRIMARY KEY,
     code VARCHAR(7) NOT NULL,
