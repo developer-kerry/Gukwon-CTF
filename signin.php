@@ -1,7 +1,3 @@
-<?php 
-    include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
-    session_destroy();
-?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -17,10 +13,10 @@
             ?>
         </div>
         <div class="description">
-            <div class="plain-description">
-                <div class="row-wrap">
+            <div class="plain_description">
+                <div class="row_wrap">
                     <h3>참가자 등록</h3>
-                    <form action="/function/signin.php" class="signin-form" method="POST">
+                    <form action="/function/signin.php" class="signin_form" method="POST">
                         <input type="text" name="nickname" placeholder="닉네임"><br>
                         <input type="text" name="id" placeholder="아이디"><br>
                         <input type="password" name="pwd" placeholder="비밀번호"><br>

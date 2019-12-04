@@ -1,6 +1,19 @@
+<?php
+    include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+?>
 <html>
     <head>
         <meta charset="utf-8">
+        <style>
+            <?php
+                if($is_on_contest){
+                    echo ".top_nav{ background-color:#C7FFE3; }";
+                }
+                else{
+                    echo ".top_nav{ background-color:#F0F0F0; }";
+                }
+            ?>
+        </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/index.css">
         <title>문제 풀기</title>
@@ -15,7 +28,7 @@
             <div class="function">
                 문제 풀기
             </div>
-            <div class="plain-description">
+            <div class="plain_description">
                 문제 풀기
             </div>
         </div>

@@ -1,6 +1,19 @@
+<?php
+    include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+?>
 <html>
     <head>
         <meta charset="utf-8">
+        <style>
+            <?php
+                if($is_on_contest){
+                    echo ".top_nav{ background-color:#C7FFE3; }";
+                }
+                else{
+                    echo ".top_nav{ background-color:#F0F0F0; }";
+                }
+            ?>
+        </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/instruction.css">
         <title>대회 방법</title>
@@ -12,8 +25,13 @@
             ?>
         </div>
         <div class="description">
-            <div class="plain-description">
-                <h3>대회 진행방법</h3>
+            <div class="plain_description">
+                <div class="row_wrap">
+                    <h3>대회 진행방법</h3>
+                    <p>
+                        ~~~
+                    </p>
+                </div>
             </div>
         </div>
     </body>

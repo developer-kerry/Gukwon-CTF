@@ -1,6 +1,19 @@
+<?php
+    include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+?>
 <html>
     <head>
         <meta charset="utf-8">
+        <style>
+            <?php
+                if($is_on_contest){
+                    echo ".top_nav{ background-color:#C7FFE3; }";
+                }
+                else{
+                    echo ".top_nav{ background-color:#F0F0F0; }";
+                }
+            ?>
+        </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/index.css">
         <title>Hell World!</title>
@@ -15,8 +28,8 @@
             <div class="function">
                 <a href="/index.php"><img src="./media/main-banner.jpg" alt="심영과 상하이조의 짜릿한 한판승부!(두둥)"></a>
             </div>
-            <div class="plain-description">
-                <div class="row-wrap">
+            <div class="plain_description">
+                <div class="row_wrap">
                     <h3>CTF란?</h3>
                     <p>
                         CTF란 Capture-the-Flag의 약어로, Flag를 취득해 점수를 얻고 다른 사람들과 경쟁하는 게임입니다. 
@@ -27,7 +40,7 @@
                         그것을 Flag 입력창에 입력하여 점수를 얻는 방식입니다. 본 CTF 시스템은 Jeopardy 방식 시스템입니다.
                     </p>
                 </div>
-                <div class="row-wrap">
+                <div class="row_wrap">
                     <h3>최근 공지사항(5개)</h3>
                     <p>
                         temp

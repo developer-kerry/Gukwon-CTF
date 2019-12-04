@@ -27,7 +27,7 @@
             $stdid = mysqli_real_escape_string($conn, $_POST['stdid']);
             $auth_code = mysqli_real_escape_string($conn, $_POST['auth_code']);
 
-            $sql = "SELECT COUNT(*), root FROM auth_code WHERE code='$auth_code' AND stdid=$stdid";
+            $sql = "SELECT COUNT(*), is_manager, is_superuser FROM auth_code WHERE code='$auth_code' AND stdid=$stdid";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
             if($result[0] == 0){
@@ -35,12 +35,13 @@
             }
             else{
                 $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
-                $root = (int)$result[1];
+                $is_manager = (int)$result[1];
+                $is_superuser = (int)$result[2]; 
 
                 $sql = "DELETE FROM auth_code WHERE stdid=$stdid";
                 mysqli_query($conn, $sql);
 
-                $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$nickname', $stdid, 0, $root)";
+                $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$nickname', $stdid, 0, $is_manager, $is_superuser, 0)";
                 mysqli_query($conn, $sql);
 
                 echo "<script>alert('가입 성공!');location.href='/login.php';</script>";
