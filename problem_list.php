@@ -6,12 +6,7 @@
         <meta charset="utf-8">
         <style>
             <?php
-                if($is_on_contest){
-                    echo ".top_nav{ background-color:#C7FFE3; }";
-                }
-                else{
-                    echo ".top_nav{ background-color:#F0F0F0; }";
-                }
+                include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
