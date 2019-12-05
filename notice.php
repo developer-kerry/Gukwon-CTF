@@ -56,12 +56,12 @@
                                 ?>
                             </tbody>
                         </table>
+                        <?php
+                            if($is_manager | true){
+                                echo "<div class=\"button\"><a href=\"/manager-pages/writenotice.php\"><img src=\"https://unicons.iconscout.com/release/v2.0.1/svg/line/edit.svg\" alt=\"Pencil-on-Square\"> 공지 작성</a></div>";
+                            }
+                        ?>
                     </p>
-                    <?php
-                        if($is_manager | true){
-                            echo "<div class=\"button\"><a href=\"/manager-pages/writenotice.php\"><img src=\"https://unicons.iconscout.com/release/v2.0.1/svg/line/edit.svg\" alt=\"Pencil-on-Square\"> 공지 작성</a></div>";
-                        }
-                    ?>
                 </div>
             </div>
         </div>

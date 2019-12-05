@@ -24,6 +24,9 @@ body{
 .top_nav .top_nav_left .website_name_text{
     font-weight:550;
     margin-right:30px;
+}
+
+.top_nav .top_nav_left .website_name_text a{
     text-decoration:none;
     color:black;
 }

@@ -21,7 +21,7 @@
         </div>
         <div class="description">
             <div class="function">
-                <a href="/index.php"><img src="./media/main-banner.jpg" alt="심영과 상하이조의 짜릿한 한판승부!(두둥)"></a>
+                <img src="./media/main-banner.jpg" alt="심영과 상하이조의 짜릿한 한판승부!(두둥)">
             </div>
             <div class="plain_description">
                 <div class="row_wrap">

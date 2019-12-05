@@ -1,3 +1,8 @@
 .row_wrap .button{
     width:100px;
 }
+
+.row_wrap .button{
+    margin-top:100px;
+    margin-left:30px;
+}

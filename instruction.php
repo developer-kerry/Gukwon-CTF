@@ -23,9 +23,9 @@
             <div class="plain_description">
                 <div class="row_wrap">
                     <h3>대회 진행방법</h3>
-                    <p>
+                    <span>
                         ~~~
-                    </p>
+                    </span>
                 </div>
             </div>
         </div>
