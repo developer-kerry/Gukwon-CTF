@@ -7,11 +7,15 @@
         <style>
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
+
+                if(!isset($_GET['idx'])){
+                    ShowAlert("잘못된 접근입니다.");
+                }
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/noticeviewer.css">
-        <title>공지 작성</title>
+        <title>공지 열람중</title>
     </head>
     <body>
         <div class="top_nav">
@@ -22,16 +26,23 @@
         <div class="description">
             <div class="plain_description">
                 <div class="row_wrap">
-                    <h3>공지 작성</h3>
-                    <span>
-                        <form action="/function/writenotice.php" method="POST">
-                            <input type="text" id="title" name="title" placeholder="제목"><br>
-                            <br>
-                            <strong>내용 작성</strong>
-                            <textarea name="description" cols="30" rows="10"></textarea><br>
-                            <input type="submit" id="submit" value="등록">
-                        </form>
-                    </span>
+                    <?php
+                        $idx = mysqli_real_escape_string($conn, $_GET['idx']);
+                        $sql = "SELECT title, author, upload_datetime, description FROM notice WHERE idx=$idx";
+                        $content = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+
+                        $title = $content['title'];
+                        $author = $content['author'];
+                        $datetime = $content['upload_datetime'];
+                        $description = $content['description'];
+                        
+                        echo "<div class=\"title\">";
+                        echo "  <h3>$title</h3>";
+                        echo "  <h4>작성자: $author</h4>";
+                        echo "  <h4>작성시: $datetime</h4>";
+                        echo "</div>";
+                        echo "<p>$description</p>";
+                    ?>
                 </div>
             </div>
         </div>
