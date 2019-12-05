@@ -10,3 +10,15 @@
     margin-right:auto;
     padding-bottom:15px;
 }
+
+table thead th{
+    border-bottom:1px solid gray;
+}
+
+table .title{
+    min-width:250px;
+}
+
+table .upload_datetime{
+    min-width:140px;
+}
