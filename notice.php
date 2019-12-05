@@ -38,8 +38,8 @@
 
                                     while(($row = mysqli_fetch_assoc($result))){
                                         $idx = (string)$row['idx'];
-                                        $title = htmlspecialchars($row['idx']);
-                                        $author = htmlspecialchars($row['author']);
+                                        $title = $row['idx'];
+                                        $author = $row['author'];
                                         $upload_datetime = (string)$row['upload_datetime'];
 
                                         echo "

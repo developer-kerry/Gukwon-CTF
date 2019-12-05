@@ -38,7 +38,12 @@
                 <div class="row_wrap">
                     <h3>최근 공지사항(5개)</h3>
                     <p>
-                        temp
+                        <table>
+                            <thead>
+                                <th>제목</th>
+                                <th></th>
+                            </thead>
+                        </table>
                     </p>
                 </div>   
             </div>

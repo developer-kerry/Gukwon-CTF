@@ -25,4 +25,8 @@
             $signed = true;
         }
     }
+
+    function ShowAlert($msg){
+        echo "<script>alert(\"$msg\");history.back();</script>";
+    }
 ?>

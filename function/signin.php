@@ -1,8 +1,8 @@
 <?php
     include("include.php");
 
-    $id = mysqli_real_escape_string($conn, $_POST['id']);
-    $nickname = mysqli_real_escape_string($conn, $_POST['nickname']);
+    $id = mysqli_real_escape_string($conn, htmlspecialchars($_POST['id']));
+    $nickname = mysqli_real_escape_string($conn, htmlspecialchars($_POST['nickname']));
     
     $cnt_id = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) FROM user_info WHERE id='$id'"))[0];
     $cnt_nickname = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) FROM user_info WHERE nickname='$nickname'"))[0];
@@ -24,7 +24,7 @@
             echo "<script>alert('비밀번호를 다시 확인해주세요.');history.back();</script>";
         }
         else{
-            $stdid = mysqli_real_escape_string($conn, $_POST['stdid']);
+            $stdid = mysqli_real_escape_string($conn, htmlspecialchars($_POST['stdid']));
             $auth_code = mysqli_real_escape_string($conn, $_POST['auth_code']);
 
             $sql = "SELECT COUNT(*), is_manager, is_superuser FROM auth_code WHERE code='$auth_code' AND stdid=$stdid";

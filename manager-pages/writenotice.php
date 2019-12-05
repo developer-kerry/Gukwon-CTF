@@ -2,7 +2,7 @@
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
 
     if(!$is_manager){
-        //echo "<script>alert(\"잘못된 접근입니다.\");history.back();</script>";
+        ShowAlert("잘못된 접근입니다.");
     }
 ?>
 <html>
@@ -30,6 +30,8 @@
                     <span>
                         <form action="/function/writenotice.php" method="POST">
                             <input type="text" id="title" name="title" placeholder="제목"><br>
+                            <br>
+                            <strong>내용 작성</strong>
                             <textarea name="description" cols="30" rows="10"></textarea><br>
                             <input type="submit" id="submit" value="등록">
                         </form>
