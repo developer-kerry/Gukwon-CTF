@@ -29,7 +29,6 @@
             <div class="plain_description">
                 <div class="row_wrap">
                     <h3>로그인</h3>
-                    <?php if(isset($_GET['msg'])){ echo $msg; } ?>
                     <br>
                     <form action="/function/login.php" class="login_form" method="POST">
                         <input type="text" name="id" placeholder="아이디"><br>
