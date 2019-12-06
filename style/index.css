@@ -22,3 +22,22 @@ table .title{
 table .upload_datetime{
     min-width:140px;
 }
+
+table tbody tr td{
+    border-bottom:1px solid #C6C6C6;
+}
+
+table tbody a{
+    text-decoration:none;
+    color:black;
+}
+
+table tbody a:hover{
+    text-decoration:underline;
+    background-color:#D7D7D7;
+}
+
+table tbody a:active{
+    text-decoration:underline;
+    background-color:#B0B0B0;
+}

@@ -26,10 +26,10 @@
                     <p>
                         <table>
                             <thead>
-                                <th>번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>작성 시각</th>
+                                <th id="index">번호</th>
+                                <th id="title">제목</th>
+                                <th id="author">작성자</th>
+                                <th id="datetime">작성 시각</th>
                             </thead>
                             <tbody>
                                 <?php
@@ -50,23 +50,21 @@
                                         }
 
                                         echo "
-                                        <a href=\"/noticeViewer.php?idx=$idx\">
-                                            <tr>
-                                                <td>$idx</td>
-                                                <a href=\"/noticeviewer.php?idx=$idx\">
-                                                    <td class=\"title\">$title</td>
-                                                </a>
-                                                <td>$author</td>
-                                                <td>$upload_datetime</td>
-                                            </tr>
-                                        </a>
+                                        <tr>
+                                            <td class=\"index\">$idx</td>
+                                            <td class=\"title\">
+                                                &nbsp;&nbsp;<a href=\"/noticeviewer.php?idx=$idx\">$title</a>
+                                            </td>
+                                            <td class=\"author\">$author</td>
+                                            <td class=\"datetime\">$upload_datetime</td>
+                                        </tr>
                                         ";
                                     }
                                 ?>
                             </tbody>
                         </table>
                         <?php
-                            if($is_manager | true){
+                            if($is_manager){
                                 echo "<div class=\"button\"><a href=\"/manager-pages/writenotice.php\"><img src=\"https://unicons.iconscout.com/release/v2.0.1/svg/line/edit.svg\" alt=\"Pencil-on-Square\"> 공지 작성</a></div>";
                             }
                         ?>

@@ -4,28 +4,29 @@
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
 
-    $sql = "SELECT COUNT(*) as cnt, nickname FROM user_info WHERE id='$id'";
-    $result = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+    $sql = "SELECT nickname, pwd_hash AS hsh, is_manager AS manager, is_on_contest AS on_contest FROM user_info WHERE id='$id'";
+    $result = mysqli_query($conn, $sql);
 
-    $nickname = $result['nickname'];
-    $hash_seed = ((string)rand()).$nickname.((string)rand());
-    $token = hash("sha512", $hash_seed);
+    $cnt_rows = mysqli_num_rows($result);
+    $result = mysqli_fetch_assoc($result);
 
-    $sql = "INSERT INTO access_token VALUES('$token', '$nickname', NOW())";
-    mysqli_query($conn, $sql);
+    if($cnt_rows == 1 && password_verify($pwd, $result['hsh'])){
+        $nickname = $result['nickname'];
+        $hash_seed = ((string)rand()).$nickname.((string)rand());
+        $token = hash("sha512", $hash_seed);
+        $is_manager = $result['manager'];
+        $is_on_contest = $result['on_contest'];
+        
+        $sql = "INSERT INTO access_token VALUES('$token', '$nickname', NOW(), $is_manager, $is_on_contest)";
+        mysqli_query($conn, $sql);
+        
+        $_SESSION['token'] = $token;
+        $_SESSION['nickname'] = $nickname;
 
-    if($result['cnt'] == 1 && password_verify($pwd, $result['pwd_hash'])){
-        session_destroy();
-        session_start();
-
-        $_SESSION['token'] = $result['token'];
-        $_SESSION['nickname'] = $result['nickname'];
-
-        $location = $_SERVER['DOCUMENT_ROOT']."/index.php";
-        header("Location:$location");
+        MoveLocation("/index.php");
     }
     else{
         session_destroy();
-        echo "<script>alert('로그인 정보가 틀립니다.');history.back();</script>";
+        ShowAlertWithHistoryBack("로그인 정보가 잘못되었습니다.");
     }
 ?>

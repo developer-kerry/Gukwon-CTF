@@ -8,20 +8,20 @@
     $cnt_nickname = mysqli_fetch_array(mysqli_query($conn, "SELECT COUNT(*) FROM user_info WHERE nickname='$nickname'"))[0];
 
     if($cnt_nickname > 0){
-        echo "<script>alert('이미 존재하는 닉네임입니다.');history.back();</script>";
+        ShowAlertWithHistoryBack('이미 존재하는 닉네임입니다.');
     }
     else if($cnt_id > 0){
-        echo "<script>alert('이미 존재하는 아이디입니다.');history.back();</script>";
+        ShowAlertWithHistoryBack('이미 존재하는 아이디입니다.');
     }
     else{
         $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
         $pwd_chk = mysqli_real_escape_string($conn, $_POST['pwd_chk']);
 
         if(strlen($pwd) < 9){
-            echo "<script>alert('비밀번호는 9자리 이상이어야 합니다.');history.back();</script>";
+            ShowAlertWithHistoryBack('비밀번호는 9자리 이상이어야 합니다.');
         }
         else if($pwd != $pwd_chk){
-            echo "<script>alert('비밀번호를 다시 확인해주세요.');history.back();</script>";
+            ShowAlertWithHistoryBack('비밀번호를 다시 확인해주세요.');
         }
         else{
             $stdid = mysqli_real_escape_string($conn, htmlspecialchars($_POST['stdid']));
@@ -31,7 +31,7 @@
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
             if($result[0] == 0){
-                echo "<script>alert('인증번호와 학번을 다시 확인해주세요.');history.back();</script>";
+                ShowAlertWithHistoryBack('인증번호와 학번을 다시 확인해주세요.');
             }
             else{
                 $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
@@ -44,7 +44,8 @@
                 $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$nickname', $stdid, 0, $is_manager, $is_superuser, 0)";
                 mysqli_query($conn, $sql);
 
-                echo "<script>alert('가입 성공!');location.href='/login.php';</script>";
+                ShowAlert("가입 성공!");
+                MoveLocation("/login.php");
             }
         }   
     }

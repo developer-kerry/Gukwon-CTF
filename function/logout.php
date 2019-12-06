@@ -2,6 +2,5 @@
     session_start();
     session_destroy();
 
-    $location = $_SERVER['DOCUMENT_ROOT']."/index.php";
-    header("Location:$location");
+    echo "<script>location.href=\"/index.php\"</script>";
 ?>

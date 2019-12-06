@@ -1,5 +1,5 @@
 <?php
-    if($is_on_contest){
+    if($signed){
         echo ".top_nav{ background-color:#C7FFE3; }";
         echo ".button a:hover{ background-color:#ABE1C6; }";
         echo ".button a:active{ background-color:#89B7A0; }";

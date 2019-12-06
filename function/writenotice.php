@@ -9,13 +9,12 @@
     }
     else{
         $title = mysqli_real_escape_string($conn, htmlspecialchars($_POST['title']));
-        $description = mysqli_real_escape_string($conn, nl2br(htmlspeicalchars($_POST['description'])));
+        $description = mysqli_real_escape_string($conn, nl2br(htmlspecialchars($_POST['description'])));
         $author = $nickname;
 
         $sql = "INSERT INTO notice(title, author, upload_datetime, description) VALUES('$title', '$author', NOW(), '$description')";
         mysqli_query($conn, $sql);
 
-        $location = $_SERVER['DOCUMENT_ROOT']."/notice.php";
-        header("Location:$location");
+        MoveLocation("/notice.php");
     }
 ?>

@@ -21,8 +21,8 @@ CREATE TABLE access_token(
 );
 
 CREATE TABLE auth_code(
-    stdid INT NOT NULL PRIMARY KEY,
-    code VARCHAR(7) NOT NULL,
+    stdid INT,
+    code VARCHAR(7) NOT NULL PRIMARY KEY,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL
 );
@@ -30,7 +30,7 @@ CREATE TABLE auth_code(
 CREATE TABLE problem(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title TEXT NOT NULL,
-    author INT NOT NULL,
+    author TEXT NOT NULL,
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL,
     score INT,
@@ -40,7 +40,7 @@ CREATE TABLE problem(
 CREATE TABLE notice(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title TEXT NOT NULL,
-    author INT NOT NULL,
+    author TEXT NOT NULL,
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL
 );

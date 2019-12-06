@@ -36,10 +36,10 @@
                         $datetime = $content['upload_datetime'];
                         $description = $content['description'];
                         
-                        echo "<div class=\"title\">";
-                        echo "  <h3>$title</h3>";
-                        echo "  <h4>작성자: $author</h4>";
-                        echo "  <h4>작성시: $datetime</h4>";
+                        echo "<div id=\"header\">";
+                        echo "  <h2>$title</h2>";
+                        echo "  <strong>작성자: $author</strong><br>";
+                        echo "  <strong>작성시: $datetime</strong>";
                         echo "</div>";
                         echo "<p>$description</p>";
                     ?>
