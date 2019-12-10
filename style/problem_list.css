@@ -19,3 +19,34 @@
     border-bottom:1px solid #CECECE;
     margin-bottom:30px;
 }
+
+.subject h4{
+    margin-left:125px;
+}
+
+.subject{
+    padding-bottom:30px;
+    border-bottom:1px solid gray;
+}
+
+.row_cell{
+    width:830px;
+    height:250px;
+    padding-left:75px;
+    padding-right:75px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.row_cell .cell{
+    width:180px;
+    height:225px;
+    float:left;
+    border:1px solid gray;
+    text-align:center;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:12.5px;
+    padding-bottom:12.5px;
+    margin:2.5px;
+}

@@ -29,6 +29,37 @@
             </div>
             <div class="plain_description">
                 <h3>문제 리스트</h3>
+                <div class="subject">
+                    <h4>씨발</h4>
+                    <div class="row_cell">
+                        <span class="cell">
+                            1                        
+                        </span>
+                        <span class="cell">
+                            2
+                        </span>
+                        <span class="cell">
+                            3
+                        </span>
+                        <span class="cell">
+                            4
+                        </span>
+                    </div>
+                    <div class="row_cell">
+                        <span class="cell">
+                            1                        
+                        </span>
+                        <span class="cell">
+                            2
+                        </span>
+                        <span class="cell">
+                            3
+                        </span>
+                        <span class="cell">
+                            4
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
