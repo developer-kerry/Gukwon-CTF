@@ -9,7 +9,8 @@ CREATE TABLE user_info(
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
-    is_on_contest BOOLEAN NOT NULL
+    is_on_contest BOOLEAN NOT NULL,
+    last_auth DATETIME
 );
 
 CREATE TABLE access_token(

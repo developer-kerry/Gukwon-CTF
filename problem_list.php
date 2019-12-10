@@ -10,7 +10,7 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/index.css">
+        <link rel="stylesheet" href="/style/problem_list.css">
         <title>문제 풀기</title>
     </head>
     <body>
@@ -21,10 +21,14 @@
         </div>
         <div class="description">
             <div class="function">
-                문제 풀기
+                <br>
+                <form id="auth_form" action="/function/auth_problem.php">
+                    <input type="text" id="flag_input" placeholder="&nbsp;Flag 입력">
+                    <input type="submit" id="submit" value="Auth">
+                </form>
             </div>
             <div class="plain_description">
-                문제 풀기
+                <h3>문제 리스트</h3>
             </div>
         </div>
     </body>

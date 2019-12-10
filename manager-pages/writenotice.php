@@ -29,7 +29,7 @@
                     <h3>공지 작성</h3>
                     <span>
                         <form action="/function/writenotice.php" method="POST">
-                            <input type="text" id="title" name="title" placeholder="제목"><br>
+                            <input type="text" id="title" name="title" placeholder="&nbsp;&nbsp;제목"><br>
                             <br>
                             <strong>내용 작성</strong>
                             <textarea name="description" cols="30" rows="10"></textarea><br>

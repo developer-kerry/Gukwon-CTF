@@ -18,6 +18,10 @@ table tbody tr td{
     min-width:75px;
 }
 
+#last_auth{
+    min-width:200px;
+}
+
 table tr .rank{
     text-align:center;
 }
