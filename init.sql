@@ -4,7 +4,7 @@ USE gukwon_ctf;
 CREATE TABLE user_info(
     id TEXT NOT NULL,
     pwd_hash TEXT NOT NULL,
-    nickname TEXT NOT NULL,
+    nickname VARCHAR(16) PRIMARY KEY NOT NULL,
     stdid INT NOT NULL,
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
@@ -34,8 +34,9 @@ CREATE TABLE problem(
     author TEXT NOT NULL,
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL,
-    score INT,
-    flag TEXT
+    score INT NOT NULL,
+    flag TEXT NOT NULL,
+    solvers TEXT
 );
 
 CREATE TABLE notice(

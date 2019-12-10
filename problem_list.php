@@ -32,32 +32,34 @@
                 <div class="subject">
                     <h4>씨발</h4>
                     <div class="row_cell">
-                        <span class="cell">
-                            1                        
-                        </span>
-                        <span class="cell">
+                        <div class="cell">
+                            <strong class="prob_title">포너블이다 시발련들아</strong><br>
+                            <span>점수</span><br>
+                            <span>푼 사람</span>
+                        </div>
+                        <div class="cell">
                             2
-                        </span>
-                        <span class="cell">
+                        </div>
+                        <div class="cell">
                             3
-                        </span>
-                        <span class="cell">
+                        </div>
+                        <div class="cell">
                             4
-                        </span>
+                        </div>
                     </div>
                     <div class="row_cell">
-                        <span class="cell">
+                        <div class="cell">
                             1                        
-                        </span>
-                        <span class="cell">
+                        </div>
+                        <div class="cell">
                             2
-                        </span>
-                        <span class="cell">
+                        </div>
+                        <div class="cell">
                             3
-                        </span>
-                        <span class="cell">
+                        </div>
+                        <div class="cell">
                             4
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
