@@ -15,6 +15,7 @@ CREATE TABLE user_info(
 
 CREATE TABLE access_token(
     token TEXT NOT NULL,
+    stdid INT NOT NULL,
     nickname TEXT NOT NULL,
     expire_datetime DATETIME NOT NULL,
     is_manager BOOLEAN NOT NULL,
@@ -36,7 +37,8 @@ CREATE TABLE problem(
     description TEXT NOT NULL,
     score INT NOT NULL,
     flag TEXT NOT NULL,
-    solvers TEXT
+    solvers TEXT,
+    category TEXT NOT NULL
 );
 
 CREATE TABLE notice(

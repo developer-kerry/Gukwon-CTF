@@ -15,6 +15,7 @@
         echo "<script>location.href='$location';</script>";
     }
 
+    $stdid = -1;
     $is_manager = false;
     $is_on_contest = false;
     $signed = false;
@@ -31,11 +32,12 @@
         $num_row = mysqli_affected_rows($conn);
 
         if($num_row == 1){
-            $sql = "SELECT is_manager, is_on_contest FROM access_token WHERE token='$token' AND nickname='$nickname'";
+            $sql = "SELECT stdid, is_manager, is_on_contest FROM access_token WHERE token='$token' AND nickname='$nickname'";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
-            $is_manager = $result[0];
-            $is_on_contest = $result[1];
+            $stdid = $result[0];
+            $is_manager = $result[1];
+            $is_on_contest = $result[2];
             $signed = true;
         }
         else{
