@@ -33,10 +33,10 @@
                     $inner_result = mysqli_query($conn, $sql);
 
                     $row_cells = "";
-                    $cells = "";// Cells를 Array로 변경해 작동하도록 수정
+                    $cells = [];
                     $cnt_row_cells = 1;
 
-                    while(($inner_row = mysqli_fetch_assoc($result))){
+                    while(($inner_row = mysqli_fetch_assoc($inner_result))){
                         $title = htmlspecialchars($inner_row['title']);
                         $score = $inner_row['score'];
                         $solvers = $inner_row['solvers'];
@@ -45,28 +45,48 @@
                         $cnt_solvers = count($solvers);
 
                         if(array_search((string)$stdid, $solvers) == false){
-                            $cells .= "
+                            array_push($cells, "
                             <div class=\"cell\">
-                                <strong class=\"prob_title\">$title</strong>
-                                <span class=\"score\">$score</span>
-                                <span class=\"solvers\">$cnt_solvers</span>
+                                <strong class=\"prob_title\">$title</strong><br>
+                                <br>
+                                <span class=\"score\">배점: ".$score."점</span><br>
+                                <span class=\"solvers\">성공한 사람: ".$cnt_solvers."명</span>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <a href=\"#\">[풀기]</a>
+                            </div>
+                            ");
+                        }
+                    }
+                    
+                    $str_cell = "";
+                    $category = htmlspecialchars($category); 
+
+                    for($i = 0; $i < count($cells); $i++){
+                        if($i % 3 == 0 && $i > 0){
+                            $data = "
+                            <div class=\"subject\">
+                                <h4>$category</h4>
+                                <div class=\"row_cell\">
+                                    $str_cell
+                                </div>
                             </div>
                             ";
 
-                            $cnt_row_cells++;
+                            array_push($subjects, $data);
                         }
 
-                        if($cnt_row_cells % 3 == 0){
-                            $row_cells .= "<div class=\"row_cell\">$cesll</div>";
-                        }
+                        $str_cell .= $cells[$i];
                     }
 
-                    $category = htmlspecialchars($category);
                     $data = "
                     <div class=\"subject\">
                         <h4>$category</h4>
                         <div class=\"row_cell\">
-                            $cells
+                            $str_cell
                         </div>
                     </div>
                     ";
@@ -76,46 +96,23 @@
             ?>
             <div class="function">
                 <br>
-                <form id="auth_form" action="/function/auth_problem.php">
+                <form id="auth_form" action="/function/auth_problem.php" method="POST">
                     <input type="text" id="flag_input" placeholder="&nbsp;Flag 입력">
                     <input type="submit" id="submit" value="Auth">
                 </form>
             </div>
             <div class="plain_description">
                 <h3>문제 리스트</h3>
-                <div class="subject">
-                    <h4>씨발</h4>
-                    <div class="row_cell">
-                        <div class="cell">
-                            <strong class="prob_title">포너블이다 시발련들아</strong><br>
-                            <span class="score">점수</span><br>
-                            <span class="solvers">푼 사람</span>
-                        </div>
-                        <div class="cell">
-                            2
-                        </div>
-                        <div class="cell">
-                            3
-                        </div>
-                        <div class="cell">
-                            4
-                        </div>
-                    </div>
-                    <div class="row_cell">
-                        <div class="cell">
-                            1                        
-                        </div>
-                        <div class="cell">
-                            2
-                        </div>
-                        <div class="cell">
-                            3
-                        </div>
-                        <div class="cell">
-                            4
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    if(count($subjects) == 0){
+                        echo "&nbsp;&nbsp;아직 문제가 등록되지 않았습니다.";
+                    }
+                    else{
+                        for($i = 0; $i < count($subjects); $i++){
+                            echo $subjects[$i];
+                        }
+                    }
+                ?>
             </div>
         </div>
     </body>
