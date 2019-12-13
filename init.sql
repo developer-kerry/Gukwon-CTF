@@ -4,8 +4,8 @@ USE gukwon_ctf;
 CREATE TABLE user_info(
     id TEXT NOT NULL,
     pwd_hash TEXT NOT NULL,
-    nickname VARCHAR(16) PRIMARY KEY NOT NULL,
-    stdid INT NOT NULL,
+    nickname VARCHAR(16) NOT NULL,
+    stdid INT NOT NULL PRIMARY KEY,
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
