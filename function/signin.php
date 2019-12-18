@@ -41,7 +41,7 @@
                 $sql = "DELETE FROM auth_code WHERE stdid=$stdid";
                 mysqli_query($conn, $sql);
 
-                $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$nickname', $stdid, 0, $is_manager, $is_superuser, 0, NULL)";
+                $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$nickname', $stdid, 0, $is_manager, $is_superuser, NULL)";
                 mysqli_query($conn, $sql);
 
                 ShowAlert("가입 성공!");

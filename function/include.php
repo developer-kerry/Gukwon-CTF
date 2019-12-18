@@ -15,9 +15,13 @@
         echo "<script>location.href='$location';</script>";
     }
 
+    $sql = "SELECT * FROM contest_status";
+    $result = mysqli_fetch_array(mysqli_query($conn, $sql));
+
     $stdid = -1;
     $is_manager = false;
-    $is_on_contest = false;
+    $is_on_contest = $result[0];
+    $contest_start = $result[1];
     $signed = false;
 
     $sql = "DELETE FROM access_token WHERE TIMESTAMPDIFF(minute, expire_datetime, NOW()) > 15";

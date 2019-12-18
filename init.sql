@@ -9,8 +9,12 @@ CREATE TABLE user_info(
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
-    is_on_contest BOOLEAN NOT NULL,
     last_auth DATETIME
+);
+
+CREATE TABLE contest_status(
+    is_on_contest BOOLEAN NOT NULL,
+    contest_start DATETIME NOT NULL
 );
 
 CREATE TABLE access_token(
@@ -18,8 +22,7 @@ CREATE TABLE access_token(
     stdid INT NOT NULL,
     nickname TEXT NOT NULL,
     expire_datetime DATETIME NOT NULL,
-    is_manager BOOLEAN NOT NULL,
-    is_on_contest BOOLEAN NOT NULL
+    is_manager BOOLEAN NOT NULL
 );
 
 CREATE TABLE auth_code(
