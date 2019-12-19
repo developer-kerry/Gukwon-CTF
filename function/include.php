@@ -16,12 +16,14 @@
     }
 
     $sql = "SELECT * FROM contest_status";
-    $result = mysqli_fetch_array(mysqli_query($conn, $sql));
+    $result = mysqli_query($conn, $sql);
+    $num_rows = mysqli_num_rows($result);
+    $result = mysqli_fetch_array($result);
 
     $stdid = -1;
     $is_manager = false;
-    $is_on_contest = $result[0];
-    $contest_start = $result[1];
+    $is_on_contest = ($num_rows == 0 || $result[0] == 0) ? false : true;
+    $start_datetime = $result[1];
     $signed = false;
 
     $sql = "DELETE FROM access_token WHERE TIMESTAMPDIFF(minute, expire_datetime, NOW()) > 15";
@@ -36,12 +38,11 @@
         $num_row = mysqli_affected_rows($conn);
 
         if($num_row == 1){
-            $sql = "SELECT stdid, is_manager, is_on_contest FROM access_token WHERE token='$token' AND nickname='$nickname'";
+            $sql = "SELECT stdid, is_manager FROM access_token WHERE token='$token' AND nickname='$nickname'";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
             $stdid = $result[0];
             $is_manager = $result[1];
-            $is_on_contest = $result[2];
             $signed = true;
         }
         else{

@@ -14,7 +14,7 @@ CREATE TABLE user_info(
 
 CREATE TABLE contest_status(
     is_on_contest BOOLEAN NOT NULL,
-    contest_start DATETIME NOT NULL
+    start_datetime DATETIME NOT NULL
 );
 
 CREATE TABLE access_token(
@@ -41,7 +41,9 @@ CREATE TABLE problem(
     score INT NOT NULL,
     flag TEXT NOT NULL,
     solvers TEXT,
-    category TEXT NOT NULL
+    category TEXT NOT NULL,
+    hint1 TEXT NOT NULL,
+    hint2 TEXT NOT NULL
 );
 
 CREATE TABLE notice(

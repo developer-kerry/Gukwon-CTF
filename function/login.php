@@ -19,7 +19,7 @@
         
         $sql = "INSERT INTO access_token VALUES('$token', $stdid,'$nickname', NOW(), $is_manager)";
         mysqli_query($conn, $sql);
-        
+
         $_SESSION['token'] = $token;
         $_SESSION['nickname'] = $nickname;
 

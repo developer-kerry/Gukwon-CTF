@@ -1,5 +1,8 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+    if(!$is_on_contest){
+        ShowAlertWithHistoryBack("대회 진행중이 아닙니다.");
+    }
 ?>
 <html>
     <head>
