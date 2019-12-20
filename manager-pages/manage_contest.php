@@ -1,8 +1,8 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
 
-    if(!$signed){
-        ShowAlertWithHistoryBack("잘못된 접근입니다.");
+    if(!$is_manager){
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
 ?>
 <html>
@@ -31,11 +31,11 @@
                         <p>
                             <?php
                                 if($is_on_contest){
-                                    echo "<strong>대회가 현재 진행중입니다. 시작 시간: $start_datetime</strong>&nbsp;";
+                                    echo "<strong>대회가 현재 진행중입니다.<br>시작 시간: $start_datetime</strong><br><br>";
                                     echo "<button onclick=\"location.href='/function/manage_contest.php?handle=stop';\">대회 중지</button>";
                                 }
                                 else{
-                                    echo "<strong>현재 대회 진행중이 아닙니다.</strong>&nbsp;";
+                                    echo "<strong>현재 대회 진행중이 아닙니다.</strong>&nbsp;->&nbsp;";
                                     echo "<button onclick=\"location.href='/function/manage_contest.php?handle=start';\">대회 시작</button>";
                                 }
                             ?>

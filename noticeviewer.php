@@ -9,9 +9,15 @@
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
 
                 if(!isset($_GET['idx'])){
-                    ShowAlert("잘못된 접근입니다.");
+                    ShowAlertWithHistoryBack("잘못된 접근입니다.");
                 }
             ?>
+
+            #header{
+                padding-bottom:30px;
+                margin-bottom:60px;
+                border-bottom:1px solid #B0B0B0;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/noticeviewer.css">

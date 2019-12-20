@@ -13,6 +13,11 @@
             .button a:active{
                 background-color:#9E9E9E;
             }
+
+            .row_wrap .signin_form input{
+                width:200px;
+                margin-left:30px;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/signin.css">

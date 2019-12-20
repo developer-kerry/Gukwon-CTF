@@ -11,8 +11,19 @@
         echo "<script>history.back();</script>";
     }
 
+    function ShowAlertWithMove2Index($msg){
+        ShowAlert($msg);
+        echo "<script>location.href=\"/index.php\";</script>";
+    }
+
     function MoveLocation($location){
         echo "<script>location.href='$location';</script>";
+    }
+
+    function GetDatetime(){
+        $datetime = new DateTime("now");
+        $datetime->setTimezone(new DateTimeZone("Asia/Seoul"));
+        return $datetime->format("Y-m-d H:i:s");
     }
 
     $sql = "SELECT * FROM contest_status";

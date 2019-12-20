@@ -2,6 +2,11 @@
     <head>
         <meta charset="utf-8">
         <style>
+            .row_wrap .login_form input{
+                width:200px;
+                margin-left:30px;
+            }
+            
             .top_nav{ 
                 background-color:#F0F0F0;
             }

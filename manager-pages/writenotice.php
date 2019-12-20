@@ -2,7 +2,7 @@
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
 
     if(!$is_manager){
-        ShowAlert("잘못된 접근입니다.");
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
 ?>
 <html>
@@ -12,6 +12,31 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
+
+            .row_wrap span form{
+                width:70%;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            .row_wrap span form input{
+                width:100%;
+                font-size:20px;
+            }
+
+            .row_wrap span form #title{
+                height:50px;
+            }
+
+            .row_wrap span form #submit{
+                height:30px;
+            }
+
+            .row_wrap span form textarea{
+                width:100%;
+                height:500px;
+                resize:none;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/writenotice.css">

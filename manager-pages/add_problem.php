@@ -1,8 +1,9 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+    include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
 
-    if(!$signed){
-        ShowAlertWithHistoryBack("잘못된 접근입니다.");
+    if(!$is_manager){
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
 ?>
 <html>
@@ -27,16 +28,11 @@
             <div class="plain_description">
                 <div class="row_description">
                     <div class="row_wrap">
-                        <h3>기본 정보</h3>
+                        <h3>문제 리스트</h3>
                         <?php
-                            $nickname = htmlspecialchars($_SESSION['nickname']);
-                            echo "<p>학번: $stdid<br>";
-                            echo "닉네임: $nickname</p>";
+                            PrintProblemOnGrid($conn, $stdid, "ALL");
                         ?>
                     </div>
-                    <?php
-                        echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/manager_menu.html"); 
-                    ?>
                 </div>
             </div>
         </div>

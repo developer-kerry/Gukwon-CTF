@@ -1,8 +1,11 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+    include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
+    /*
     if(!$is_on_contest){
-        ShowAlertWithHistoryBack("대회 진행중이 아닙니다.");
+        ShowAlertWithMove2Index("대회 진행중이 아닙니다.");
     }
+    */
 ?>
 <html>
     <head>
@@ -11,6 +14,28 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
+
+            #flag_input{
+                width:400px;
+                height:30px;
+            }
+
+            #submit{
+                width:50px;
+                height:30px;
+            }
+
+            #auth_form{
+                width:460px;
+                margin-left:auto;
+                margin-right:auto;
+                padding-bottom:25px;
+            }
+
+            .function{
+                border-bottom:1px solid #CECECE;
+                margin-bottom:30px;
+            }            
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/problem_list.css">
@@ -23,76 +48,6 @@
             ?>
         </div>
         <div class="description">
-            <?php
-                $sql = "SELECT category FROM problem GROUP BY category";
-                $result = mysqli_query($conn, $sql);
-
-                $subjects = [];
-
-                while(($row = mysqli_fetch_assoc($result))){
-                    $category = $row['category'];
-                    
-                    $sql = "SELECT idx, title, score, solvers as solvers FROM problem WHERE category = '$category' AND solvers NOT LIKE '%$stdid%'";
-                    $inner_result = mysqli_query($conn, $sql);
-
-                    $row_cells = "";
-                    $cells = [];
-                    $cnt_row_cells = 1;
-
-                    while(($inner_row = mysqli_fetch_assoc($inner_result))){
-                        $idx = $inner_row['idx'];
-                        $title = htmlspecialchars($inner_row['title']);
-                        $score = $inner_row['score'];
-                        $cnt_solvers = substr_count($inner_row['solvers'], ",");
-
-                        array_push($cells, "
-                        <div class=\"cell\">
-                            <strong class=\"prob_title\">$title</strong><br>
-                            <br>
-                            <span class=\"score\">배점: ".$score."점</span><br>
-                            <span class=\"solvers\">성공한 사람: ".$cnt_solvers."명</span>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <a href=\"problemviewer.php?idx=$idx\">[풀기]</a>
-                        </div>
-                        ");
-                    }
-                }
-                    
-                $str_cell = "";
-                $category = htmlspecialchars($category); 
-
-                for($i = 0; $i < count($cells); $i++){
-                    if($i % 3 == 0 && $i > 0){
-                        $data = "
-                        <div class=\"subject\">
-                            <h4>$category</h4>
-                            <div class=\"row_cell\">
-                                $str_cell
-                            </div>
-                        </div>
-                        ";
-
-                        array_push($subjects, $data);
-                    }
-
-                    $str_cell .= $cells[$i];
-                }
-
-                $data = "
-                <div class=\"subject\">
-                    <h4>$category</h4>
-                    <div class=\"row_cell\">
-                        $str_cell
-                    </div>
-                </div>
-                ";
-
-                array_push($subjects, $data);
-            ?>
             <div class="function">
                 <br>
                 <form id="auth_form" action="/function/auth_problem.php" method="POST">
@@ -103,14 +58,7 @@
             <div class="plain_description">
                 <h3>문제 리스트</h3>
                 <?php
-                    if(count($subjects) == 0){
-                        echo "&nbsp;&nbsp;아직 문제가 등록되지 않았습니다.";
-                    }
-                    else{
-                        for($i = 0; $i < count($subjects); $i++){
-                            echo $subjects[$i];
-                        }
-                    }
+                    PrintProblemOnGrid($conn, $stdid, "");
                 ?>
             </div>
         </div>

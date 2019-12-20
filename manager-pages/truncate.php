@@ -2,7 +2,7 @@
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
 
     if(!$signed){
-        ShowAlertWithHistoryBack("잘못된 접근입니다.");
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
 ?>
 <html>

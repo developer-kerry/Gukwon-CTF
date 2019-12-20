@@ -10,7 +10,6 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/instruction.css">
         <title>대회 방법</title>
     </head>
     <body>

@@ -8,6 +8,46 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
+            
+            table thead th{
+                border-bottom:1px solid gray;
+            }
+
+            table tbody tr td{
+                border-bottom:1px solid #C6C6C6;
+            }
+
+            #rank{
+                min-width:45px;
+            }
+
+            #nickname{
+                min-width:150px;
+            }
+
+            #score{
+                min-width:75px;
+            }
+
+            #last_auth{
+                min-width:200px;
+            }
+
+            #rank{
+                margin-left:30px;
+            }
+
+            table tr .rank{
+                text-align:center;
+            }
+
+            table tr .score{
+                text-align:center;
+            }
+
+            table{
+                padding:none;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/show_rank.css">
@@ -23,7 +63,7 @@
             <div class="plain_description">
                 <h3>대회 순위 확인</h3>
                 <?php
-                    $sql = "SELECT nickname, score, last_auth FROM user_info WHERE is_on_contest=1 AND (is_manager=0 OR is_superuser=1) ORDER BY score DESC";
+                    $sql = "SELECT nickname, score, last_auth FROM user_info WHERE (is_manager=0 OR is_superuser=1) ORDER BY score DESC";
                     $result = mysqli_query($conn, $sql);
 
                     $is_session_setted = isset($_SESSION['nickname']);
@@ -55,7 +95,7 @@
                         ";
                     }
                 ?>
-                <table>
+                <table id="rank">
                     <thead>
                         <th id="rank">순위</th>
                         <th id="nickname">닉네임</th>
