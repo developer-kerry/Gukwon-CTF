@@ -43,7 +43,8 @@ CREATE TABLE problem(
     solvers TEXT,
     category TEXT NOT NULL,
     hint1 TEXT NOT NULL,
-    hint2 TEXT NOT NULL
+    hint2 TEXT NOT NULL,
+    setted BOOLEAN NOT NULL
 );
 
 CREATE TABLE notice(
