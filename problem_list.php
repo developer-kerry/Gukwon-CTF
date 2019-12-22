@@ -1,7 +1,7 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
     include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
-    /*
+    /* On Production
     if(!$is_on_contest){
         ShowAlertWithMove2Index("대회 진행중이 아닙니다.");
     }
@@ -57,8 +57,26 @@
             </div>
             <div class="plain_description">
                 <h3>문제 리스트</h3>
+                <div class="subject">
+                    <h4>shit</h4>
+                    <div class="row_cell">
+                        <div class="cell">
+                            <strong class="prob_title">씨발!</strong>
+                        </div>
+                        <div class="cell">
+                            <strong class="prob_title">씨발!</strong>
+                        </div>
+                        <div class="cell">
+                            <strong class="prob_title">씨발!</strong>
+                        </div>
+                        <div class="cell">
+                            <strong class="prob_title">씨발!</strong>
+                        </div>
+                    </div>
+                </div>
+
                 <?php
-                    PrintProblemOnGrid($conn, $stdid, "");
+                    ProblemGrid->Print($conn, $stdid);
                 ?>
             </div>
         </div>
