@@ -33,6 +33,28 @@
             #textInput{
                 margin-top:3px;
             }
+            
+            .problem_form{
+                width:750px;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+            #title{
+                width:750px;
+                height:50px;
+                font-size:20px;
+            }
+
+            #description{
+                width:750px;
+                height:500px;
+                resize:none;
+            }
+
+            #textInput{
+                width:760px;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <title>문제 등록</title>
@@ -53,7 +75,7 @@
 
                     if(chkInput2flag.checked){
                         textInput.style = "";
-                        textInput.placeholder = "정답 입력";
+                        textInput.placeholder = " 정답 입력";
                     }
                     else{
                         textInput.style = "display:none;";
@@ -64,9 +86,8 @@
                     chkInput2flag.checked = false;
                     textInput.style = "";
                     textInput.value = "";
-                    textInput.placeholder = "Flag 입력";
+                    textInput.placeholder = " Flag 입력";
                 }
-
             }
         </script>
         <div class="top_nav">
@@ -78,31 +99,34 @@
             <div class="plain_description">
                 <div class="row_wrap">
                     <h3>문제 등록하기</h3>
-                    <form action="/function/add_problem.php" class="problem" method="POST">
-                        <h4>문제 내용</h4>
-                        <input type="text" name="prob_title" placeholder="문제 제목"><br>
-                        <textarea name="prob_description" cols="30" rows="10"></textarea><br>
-                        <br>
-                        <h4>문제 세부 설정</h4>
-                        <span class="combobox">점수:&nbsp;
-                            <select name="score">
-                                <option value="50">50점</option>
-                                <option value="100">100점</option>
-                                <option value="150">150점</option>
-                                <option value="200">200점</option>
-                            </select><br>
-                        </span>
-                        <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onchange="changeHandler();" checked> Flag 자동 설정
-                        <input type="radio" name="flag_type" id="rdoManual" class="radio" value="manual" onchange="changeHandler();"> Flag 직접 설정<br>
-                        <span id="input2flag">
-                            <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
-                        </span>
-                        <input type="text" name="textInput" id="textInput" style="display:none;"><br>
-                        <input type="submit" id="submit" value="문제 등록">
-                    </form>
+                    <div class="problem_form">
+                        <form action="/function/add_problem.php" class="problem" method="POST">
+                            <h4>문제 제목</h4>
+                            <input type="text" name="prob_title" id="title" placeholder="&nbsp;문제 제목"><br>
+                            <h4>문제 본문</h4>
+                            <textarea name="prob_description" id="description" cols="30" rows="10"></textarea><br>
+                            <br>
+                            <h4>문제 세부 설정</h4>
+                            <span class="combobox">점수:&nbsp;
+                                <select name="score">
+                                    <option value="50">50점</option>
+                                    <option value="100">100점</option>
+                                    <option value="150">150점</option>
+                                    <option value="200">200점</option>
+                                </select><br>
+                            </span>
+                            <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onchange="changeHandler();" checked> Flag 자동 설정
+                            <input type="radio" name="flag_type" id="rdoManual" class="radio" value="manual" onchange="changeHandler();"> Flag 직접 설정<br>
+                            <span id="input2flag">
+                                <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
+                            </span>
+                            <input type="text" name="textInput" id="textInput" style="display:none;"><br>
+                            <input type="submit" id="submit" value="문제 등록">
+                        </form>
+                    </div>
                 </div>
                 <div class="row_wrap">
-                    <h3>현재 등록된 문제 리스트</h3>
+                    <h3>등록된 문제 리스트</h3>
                     <?php
                         // 문제 리스트 출력
                     ?>
