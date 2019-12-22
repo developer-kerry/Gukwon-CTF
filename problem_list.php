@@ -57,26 +57,8 @@
             </div>
             <div class="plain_description">
                 <h3>문제 리스트</h3>
-                <div class="subject">
-                    <h4>shit</h4>
-                    <div class="row_cell">
-                        <div class="cell">
-                            <strong class="prob_title">씨발!</strong>
-                        </div>
-                        <div class="cell">
-                            <strong class="prob_title">씨발!</strong>
-                        </div>
-                        <div class="cell">
-                            <strong class="prob_title">씨발!</strong>
-                        </div>
-                        <div class="cell">
-                            <strong class="prob_title">씨발!</strong>
-                        </div>
-                    </div>
-                </div>
-
                 <?php
-                    ProblemGrid->Print($conn, $stdid);
+                    ProblemGrid::Print($conn, $stdid);
                 ?>
             </div>
         </div>

@@ -8,6 +8,49 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
+            .function{
+                width:100%;
+                text-align:center;   
+            }
+
+            .function img{
+                width:100%;
+                height:auto;
+                margin-left:auto;
+                margin-right:auto;
+                padding-bottom:15px;
+            }
+
+            table thead th{
+                border-bottom:1px solid gray;
+            }
+
+            table .title{
+                min-width:250px;
+            }
+
+            table .upload_datetime{
+                min-width:140px;
+            }
+
+            table tbody tr td{
+                border-bottom:1px solid #C6C6C6;
+            }
+
+            table tbody a{
+                text-decoration:none;
+                color:black;
+            }
+
+            table tbody a:hover{
+                text-decoration:underline;
+                background-color:#D7D7D7;
+            }
+
+            table tbody a:active{
+                text-decoration:underline;
+                background-color:#B0B0B0;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/index.css">

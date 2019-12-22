@@ -1,6 +1,5 @@
 <?php
     class ProblemGrid{
-        // Cell 하나 생성
         private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
@@ -32,7 +31,6 @@
             }
         }
 
-        // $category로 해당 카테고리의 전체 문제들을 얻어와 셀 배열 만듦
         private static function GetProblemCellsByCategory($conn, int $stdid, string $category) : array{
             $cells = [];
             $sql = "SELECT title, score, solvers, idx FROM problem";
@@ -51,7 +49,6 @@
             return $cells;
         }
 
-        // Cell을 최대 4개씩 엮어 Row들의 리스트를 생성
         private static function GenerateProblemRows($cells) : array{
             $rows = [];
 
@@ -83,7 +80,6 @@
             return $rows;
         }
 
-        // 한 주제에 대한 Rows들을 엮음
         private static function GenerateSubject(string $category, $rows) : string{
             $str_rows = "";
 
@@ -99,7 +95,6 @@
             ";
         }
 
-        // ProblemGrid 생성
         public static function Print($conn, int $stdid){
             $sql = "SELECT category FROM problem GROUP BY category";
             $result = mysqli_query($conn, $sql);
@@ -114,9 +109,15 @@
             }
 
             $result = "";
+            $subject_count = count($subjects);
 
-            for($i = 0; $i < count($subjects); $i++){
-                $result .= $subjects[$i];
+            if($subject_count == 0){
+                $result = "아직 문제가 등록되지 않았습니다.";
+            }
+            else{
+                for($i = 0; $i < count($subjects); $i++){
+                    $result .= $subjects[$i];
+                }
             }
 
             echo $result;
