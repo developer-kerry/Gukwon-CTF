@@ -53,6 +53,7 @@
             }
 
             #textInput, #hint1, #hint2{
+                margin-bottom:3px;
                 width:750px;
             }
         </style>
@@ -61,6 +62,23 @@
     </head>
     <body>
         <script>
+            comboboxChangeHandler();
+            changeHandler();
+
+            function comboboxChangeHandler(){
+                var combobox = document.getElementById("category");
+                var textCategory = document.getElementById("textCategory");
+
+                // 외않되지?
+                if(combobox.options[combobox.selectedIndex].value == "manual_input"){
+                    textCategory.style = "";
+                }
+                else{
+                    textCategory.value = "";
+                    textCategory.style = "display:none";
+                }
+            }
+
             function changeHandler(){
                 var rdoAuto = document.getElementById("rdoAuto");
                 var chkInput2flag = document.getElementById("chkInput2flag");
@@ -113,16 +131,33 @@
                                     <option value="100">100점</option>
                                     <option value="150">150점</option>
                                     <option value="200">200점</option>
-                                </select><br>
+                                </select>
                             </span>
+                            <span class="combobox">분류:&nbsp;
+                                <select name="category" id="category" onchange="comboboxChangeHandler();">
+                                    <option value="manual_input">직접 입력</option>
+                                    <?php
+                                        $sql = "SELECT category FROM problem GROUP BY category";
+                                        $result = mysqli_query($conn, $sql);
+
+                                        while(($row = mysqli_fetch_assoc($result))){
+                                            $category = $row['category'];
+                                            echo "<option value=\"$category\">$category</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </span>
+                            <input type="text" name="textCategory" id="textCategory" style="display:none;" placeholder="문제 분류 입력">
+                            <br>
+                            <br>
                             <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onchange="changeHandler();" checked> Flag 자동 설정
                             <input type="radio" name="flag_type" id="rdoManual" class="radio" value="manual" onchange="changeHandler();"> Flag 직접 설정<br>
                             <span id="input2flag">
                                 <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
                             </span>
                             <input type="text" name="textInput" id="textInput" style="display:none;"><br>
-                            <input type="text" name="hint1" id="hint1" value="hint1" placeholder="첫 번째 힌트"><br>
-                            <input type="text" name="hint2" id="hint2" value="hint2" placeholder="두 번째 힌트"><br>
+                            <input type="text" name="hint1" id="hint1" placeholder="첫 번째 힌트"><br>
+                            <input type="text" name="hint2" id="hint2" placeholder="두 번째 힌트"><br>
                             <input type="submit" id="submit" value="문제 등록">
                         </form>
                     </div>

@@ -47,6 +47,11 @@ CREATE TABLE problem(
     setted BOOLEAN NOT NULL
 );
 
+CREATE TABLE answer_flag(
+    prob_idx INT NOT NULL PRIMARY KEY,
+    answer TEXT NOT NULL
+);
+
 CREATE TABLE notice(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title TEXT NOT NULL,
