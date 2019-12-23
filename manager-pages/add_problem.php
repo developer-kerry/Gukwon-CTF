@@ -52,8 +52,8 @@
                 resize:none;
             }
 
-            #textInput{
-                width:760px;
+            #textInput, #hint1, #hint2{
+                width:750px;
             }
         </style>
         <link rel="stylesheet" href="/style/master.css">
@@ -121,6 +121,8 @@
                                 <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
                             </span>
                             <input type="text" name="textInput" id="textInput" style="display:none;"><br>
+                            <input type="text" name="hint1" id="hint1" value="hint1" placeholder="첫 번째 힌트"><br>
+                            <input type="text" name="hint2" id="hint2" value="hint2" placeholder="두 번째 힌트"><br>
                             <input type="submit" id="submit" value="문제 등록">
                         </form>
                     </div>
