@@ -61,7 +61,7 @@
             
             if($not_return){
                 $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
-                        VALUES('$title', '$nickname', NOW(), '$description', $score, '$flag', '', '')";
+                        VALUES('$title', '$nickname', NOW(), '$description', $score, '$flag', '', '카테고리', '$hint1', '$hint2', 0)";
                 // 문제 출제 페이지에서 카테고리 선택 가능토록 
             }
         }
