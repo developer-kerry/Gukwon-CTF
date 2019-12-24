@@ -3,13 +3,19 @@
         private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx, string $mode) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
-            if(substr_count($solvers, (string)$idx) == 1){
+            if(substr_count($solvers, (string)$idx) == 1 || $mode == "view"){
                 return "
                     <div class=\"solved_cell\">
                         <strong class=\"prob_title\">$title</strong>
                         <br>
                         <span class=\"score\">배점: ".$score."점</span><br>
                         <span class=\"solvers\">성공한 사람들: ".$cnt_solvers."명<span>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <a href=\"/participant-pages/solve_problem.php?mode=$mode&idx=$idx\">[보기]</a>
                     </div>
                 ";
             }
@@ -33,7 +39,7 @@
 
         private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
             $cells = [];
-            $sql = "SELECT title, score, solvers, idx FROM problem";
+            $sql = "SELECT title, score, solvers, idx FROM problem WHERE setted=TRUE";
             $result = mysqli_query($conn, $sql);
 
             while(($row = mysqli_fetch_assoc($result))){
@@ -121,6 +127,36 @@
             }
 
             echo $result;
+        }
+    }
+
+    class ProblemList{
+        static function Print($mode){
+            $sql = "SELECT idx, category, title, author, score, upload_datetime as upload FROM problem ";
+            
+            if($mode == "set"){
+                $sql .= "WHERE setted=TRUE";
+            }
+
+            $result = mysqli_query($conn, $sql);
+
+            while(($row = mysqli_fetch_assoc($result))){
+                $idx = $row['idx'];
+                $category = $row['category'];
+                $title = $row['title'];
+                $author = $row['author'];
+                $score = $row['score'];
+                $upload = $row['upload'];
+
+                echo "
+                    <td class=\"idx\">$idx</td>
+                    <td class=\"category\">$category</td>
+                    <td class=\"title\"><a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></td>
+                    <td class=\"author\">$author</td>
+                    <td class=\"score\">$score</td>
+                    <td class=\"upload\">$upload</td>
+                ";
+            }
         }
     }
 ?>

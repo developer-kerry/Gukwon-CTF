@@ -25,19 +25,10 @@
         </div>
         <div class="description">
             <div class="plain_description">
-                <div class="row_description">
-                    <div class="row_wrap">
-                        <h3>기본 정보</h3>
-                        <?php
-                            $nickname = htmlspecialchars($_SESSION['nickname']);
-                            echo "<p>학번: $stdid<br>";
-                            echo "닉네임: $nickname</p>";
-                        ?>
-                    </div>
-                    <?php
-                        echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/manager_menu.html"); 
-                    ?>
-                </div>
+                <h3>현재 출제된 문제들</h3>
+                <?php
+                    ProblemGrid::Print($conn, $stdid, "view");
+                ?>
             </div>
         </div>
     </body>
