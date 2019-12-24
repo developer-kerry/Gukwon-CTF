@@ -62,15 +62,11 @@
     </head>
     <body>
         <script>
-            comboboxChangeHandler();
-            changeHandler();
-
             function comboboxChangeHandler(){
                 var combobox = document.getElementById("category");
                 var textCategory = document.getElementById("textCategory");
 
-                // 외않되지?
-                if(combobox.options[combobox.selectedIndex].value == "manual_input"){
+                if(combobox.value == "manual_input"){
                     textCategory.style = "";
                 }
                 else{
@@ -134,8 +130,8 @@
                                 </select>
                             </span>
                             <span class="combobox">분류:&nbsp;
-                                <select name="category" id="category" onchange="comboboxChangeHandler();">
-                                    <option value="manual_input">직접 입력</option>
+                                <select name="category" id="category" onload="comboboxChangeHandler();" onchange="comboboxChangeHandler();">
+                                    <option value="manual_input" selected>직접 입력</option>
                                     <?php
                                         $sql = "SELECT category FROM problem GROUP BY category";
                                         $result = mysqli_query($conn, $sql);
@@ -147,13 +143,13 @@
                                     ?>
                                 </select>
                             </span>
-                            <input type="text" name="textCategory" id="textCategory" style="display:none;" placeholder="문제 분류 입력">
+                            <input type="text" name="textCategory" id="textCategory" placeholder="문제 분류 입력">
                             <br>
                             <br>
-                            <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onchange="changeHandler();" checked> Flag 자동 설정
-                            <input type="radio" name="flag_type" id="rdoManual" class="radio" value="manual" onchange="changeHandler();"> Flag 직접 설정<br>
+                            <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onload="changeHandler();" onchange="changeHandler();" checked> Flag 자동 설정
+                            <input type="radio" name="flag_type" id="rdoManual" class="radio" value="manual" onload="changeHandler();" onchange="changeHandler();"> Flag 직접 설정<br>
                             <span id="input2flag">
-                                <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
+                                <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onload="changeHandler();" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
                             </span>
                             <input type="text" name="textInput" id="textInput" style="display:none;"><br>
                             <input type="text" name="hint1" id="hint1" placeholder="첫 번째 힌트"><br>

@@ -32,7 +32,6 @@
             }
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/mypage.css">
         <title>마이페이지</title>
     </head>
     <body>
