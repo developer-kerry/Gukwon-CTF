@@ -1,75 +1,89 @@
 <?php
     include("include.php");
 
-    if($signed && $is_manager){
-        $title = mysqli_real_escape_string($conn, htmlspecialchars($_POST['prob_title']));
-        $description = mysqli_real_escape_string($conn, htmlspecialchars(nl2br($_POST['prob_description'])));
-        $score = $_POST['score'];
+    function AddProblem_Process($title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
+        if($answer != null){
+            $description .= "
+                <br><br><br><br><br>
+                <form action=\"/function/\" method=\"POST\">
+                    <input type=\"text\" name=\"answer\" id=\"answer\" placeholder=\"&nbsp;정답 입력\">
+                    <input type=\"hidden\" name=\"prob_title\" value=\"$title\">
+                    <input type=\"submit\" id=\"submit\" value=\"제출\">
+                </form>
+            ";
+        }
+
+        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
+                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, FALSE)";
+        mysqli_query($conn, $sql);
+
+        $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
+        $prob_idx = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
+        
+        $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
+        mysqli_query($conn, $sql);
+
+        ShowAlertWithMoveLoaction("문제 등록 완료!", "/manager-pages/add_problem.php");
+    }
+
+    function AddProblem($title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $hint1Value, $hint2Value){
+        $title = SecureStringProcess($title);
+        $description = SecureStringProcess(nl2br($description));
         $flag = null;
-        $isAnswerRequired = false;
+        $answer = null;
+        $category = null;
+        $hint1 = "";
+        $hint2 = "";
 
-        $not_return = true; 
-
-        if(strlen($title) > 0 || strlen($description) > 0 || is_int($score)){
-            if($_POST['radio'] == "auto"){
-                $flag = md5((string)rand().GetDatetime().(string)rand());
-                
-                if($_POST['input2flag'] == "true" && strlen($_POST['textInput']) > 0){
-                    $isAnswerRequired = true;
-                }
-                else{
-                    ShowAlertWithHistoryBack("정답 값이 비어있습니다. 확인 바랍니다.");
-                    $not_return = false;
-                }
-            }
-            else if($_POST['radio'] == "manual" && strlen($_POST['textInput']) > 8){
-                $flag = mysqli_real_escape_string($conn, htmlspecialchars($_POST['textInput']));
-            }
-            else{
-                ShowAlertWithHistoryBack("입력값 재확인 바랍니다.\\nflag의 길이는 9자 이상이어야 합니다.");
-                $not_return = false;
-            }
-
-            $hint1 = null;
-            $hint2 = null;
+        if($flag_type == "auto"){
+            $flag = md5((string)rand().GetDatetime().(string)rand());
             
-            $hint1_length = strlen($_POST['hint1']);
-            $hint2_length = strlen($_POST['hint2']);
-
-            if($not_return && $hint1_length > 0 && $hint2_length == 0){
-                $hint1 = mysqli_real_escape_string($conn, htmlspecialchars($_POST['hint1']));
-                $hint2 = "";
-            }
-            else if($not_return && $hint1_length > 0 && $hint2_length > 0){
-                $hint1 = mysqli_real_escape_string($conn, htmlspecialchars($_POST['hint1']));
-                $hint2 = mysqli_real_escape_string($conn, htmlspecialchars($_POST{'hint2'}));
-            }
-            else{
-                ShowAlertWithHistoryBack("힌트 입력 상태를 다시 확인해 주세요.");
-                $not_return = false;
-            }
-
-            if($not_return && !$isAnswerRequired){
-                $description .= "
-                    <br><br><br><br><br>
-                    <form action=\"/function/answer2flag.php\" method=\"POST\">
-                        <input type=\"text\" name=\"answer\" id=\"answer\" placeholder=\"정답 입력\">
-                        <input type=\"submit\" id=\"submit\">
-                    </form>
-                ";
-            }
-            
-            if($not_return){
-                $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
-                        VALUES('$title', '$nickname', NOW(), '$description', $score, '$flag', '', '카테고리', '$hint1', '$hint2', 0)";
-                // 문제 출제 페이지에서 카테고리 선택 가능토록 
+            if($checkedValue == "true"){
+                $answer = SecureStringProcess($textInput);
             }
         }
         else{
-            ShowAlertWithHistoryBack("입력값 재확인 바랍니다.");
+            if(strlen($textInput) > 8){
+                $flag = SecureStringProcess(($textInput));
+            }
+            else{
+                ShowAlertWithHistoryBack("Flag는 9자 이상이어야 합니다.");
+                return;
+            }
         }
+
+        if($categoryValue == "manual_input"){
+            $category = SecureStringProcess(htmlspecialchars($textInput));
+        }
+        else{
+            $category = SecureStringProcess(htmlspecialchars($categoryValue));
+        }
+
+        if(strlen($hint1Value) > 0 && strlen($hint2Value) == 0){
+            $hint1 = SecureStringProcess($hint1Value);
+        }
+        else if(strlen($hint1Value) > 0 && strlen($hint2Value) > 0){
+            $hint1 = SecureStringProcess($hint1Value);
+            $hint2 = SecureStringProcess($hint2Value);
+        }
+        else{
+            ShowAlertWithHistoryBack("입력값 확인 바랍니다.");
+            return;
+        }
+
+        AddProblem_Process($title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
-    else{
-        ShowAlertWithHistoryBack("권한이 없습니다.");
-    }
+
+    AddProblem(
+        $_POST['title'], 
+        $nickname, 
+        $_POST['description'], 
+        $_POST['score'], 
+        $_POST['flag_type'], 
+        $_POST['input2flag'], 
+        $_POST['textInput'],
+        $_POST['category'],
+        $_POST['hint1'], 
+        $_POST['hint2']
+    );
 ?>

@@ -6,6 +6,11 @@
         echo "<script>alert(\"$msg\");</script>";
     }
 
+    function ShowAlertWithMoveLocation($msg, $location){
+        ShowAlert($msg);
+        echo "<script>location.href=\"$location\";</script>";
+    }
+
     function ShowAlertWithHistoryBack($msg){
         ShowAlert($msg);
         echo "<script>history.back();</script>";
@@ -24,6 +29,10 @@
         $datetime = new DateTime("now");
         $datetime->setTimezone(new DateTimeZone("Asia/Seoul"));
         return $datetime->format("Y-m-d H:i:s");
+    }
+
+    function SecureStringProcess($str){
+        return mysqli_real_escape_string($conn, htmlspecialchars($str));
     }
 
     $sql = "SELECT * FROM contest_status";
