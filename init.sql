@@ -35,7 +35,7 @@ CREATE TABLE auth_code(
 CREATE TABLE problem(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title TEXT NOT NULL,
-    author TEXT NOT NULL,
+    author VARCHAR(16) NOT NULL,
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL,
     score INT NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE answer_flag(
 CREATE TABLE notice(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title TEXT NOT NULL,
-    author TEXT NOT NULL,
+    author VARCHAR(16) NOT NULL,
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL
 );

@@ -2,6 +2,13 @@
     include("include.php");
 
     function AddProblem_Process($title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
+        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
+                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, FALSE)";
+        mysqli_query($conn, $sql);
+
+        $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
+        $prob_idx = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
+        
         if($answer != null){
             $description .= "
                 <br><br><br><br><br>
@@ -11,14 +18,10 @@
                     <input type=\"submit\" id=\"submit\" value=\"제출\">
                 </form>
             ";
+
+            $sql = "UPDATE problem SET description = '$description' WHERE idx=$prob_idx";
+            mysqli_query($conn, $sql);
         }
-
-        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
-                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, FALSE)";
-        mysqli_query($conn, $sql);
-
-        $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
-        $prob_idx = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
         
         $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
         mysqli_query($conn, $sql);

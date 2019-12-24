@@ -160,9 +160,40 @@
                 </div>
                 <div class="row_wrap">
                     <h3>등록된 문제 리스트</h3>
-                    <?php
-                        // 문제 리스트 출력
-                    ?>
+                    <table>
+                        <thead>
+                            <th id="idx">idx</th>
+                            <th id="category">분류</th>
+                            <th id="title">제목</th>
+                            <th id="author">작성자</th>
+                            <th id="score">점수</th>
+                            <th id="upload">작성일</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $sql = "SELECT idx, category, title, author, score, upload_datetime as upload FROM problem";
+                                $result = mysqli_query($conn, $sql);
+
+                                while(($row = mysqli_fetch_assoc($result))){
+                                    $idx = $row['idx'];
+                                    $category = $row['category'];
+                                    $title = $row['title'];
+                                    $author = $row['author'];
+                                    $score = $row['score'];
+                                    $upload = $row['upload'];
+
+                                    echo "
+                                        <td class=\"idx\">$idx</td>
+                                        <td class=\"category\">$category</td>
+                                        <td class=\"title\"><a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></td>
+                                        <td class=\"author\">$author</td>
+                                        <td class=\"score\">$score</td>
+                                        <td class=\"upload\">$upload</td>
+                                    ";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

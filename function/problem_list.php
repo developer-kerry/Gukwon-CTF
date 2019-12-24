@@ -1,6 +1,6 @@
 <?php
     class ProblemGrid{
-        private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx) : string{
+        private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx, string $mode) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
             if(substr_count($solvers, (string)$idx) == 1){
@@ -25,13 +25,13 @@
                         <br>
                         <br>
                         <br>
-                        <a href=\"/participant-pages/solve_problem.php?idx=$idx\">[풀기]</a>
+                        <a href=\"/participant-pages/solve_problem.php?mode=$mode&idx=$idx\">[풀기]</a>
                     </div>
                 ";
             }
         }
 
-        private static function GetProblemCellsByCategory($conn, int $stdid, string $category) : array{
+        private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
             $cells = [];
             $sql = "SELECT title, score, solvers, idx FROM problem";
             $result = mysqli_query($conn, $sql);
@@ -42,7 +42,7 @@
                 $solvers = $row['solvers'];
                 $idx = $row['idx'];
 
-                $cell = $this->GenerateCell($stdid, $title, $score, $solvers, $idx);
+                $cell = self::GenerateCell($stdid, $title, $score, $solvers, $idx, $mode);
                 array_push($cells, $cell);
             }
 
@@ -95,16 +95,16 @@
             ";
         }
 
-        public static function Print($conn, int $stdid){
+        public static function Print($conn, int $stdid, string $mode){
             $sql = "SELECT category FROM problem GROUP BY category";
             $result = mysqli_query($conn, $sql);
             $subjects = [];
 
             while(($row = mysqli_fetch_assoc($result))){
                 $category = $row['category'];
-                $cells = $this->GetProblemCellsByCategory($conn, $stdid, $category);
-                $rows = $this->GenerateProblemRows($cells);
-                $subject = $this->GenerateSubject($category, $rows);
+                $cells = self::GetProblemCellsByCategory($conn, $stdid, $category, $mode);
+                $rows = self::GenerateProblemRows($cells);
+                $subject = self::GenerateSubject($category, $rows);
                 array_push($subjects, $subject);
             }
 
