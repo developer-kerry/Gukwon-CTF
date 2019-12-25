@@ -1,12 +1,12 @@
 <?php
-    include("/include.php");
+    include("include.php");
 
     if(!$is_manager){
         ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
     else{
-        $target = $_POST['target'];
-        $mode = $_POST['mode'];
+        $target = $_GET['target'];
+        $mode = $_GET['mode'];
 
         $sql = null;
 

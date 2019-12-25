@@ -39,7 +39,7 @@ CREATE TABLE problem(
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL,
     score INT NOT NULL,
-    flag TEXT NOT NULL
+    flag TEXT NOT NULL,
     category TEXT NOT NULL,
     setted BOOLEAN NOT NULL
 );

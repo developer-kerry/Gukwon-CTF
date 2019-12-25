@@ -1,5 +1,5 @@
 <?php
-    $sql = "SELECT idx, title, category, score as upload FROM problem ";
+    $sql = "SELECT idx, title, category, score FROM problem ";
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result) == 0){
@@ -28,9 +28,9 @@
             echo "
                 <tr>
                     <td class=\"idx\">$idx</td>
-                    <td class=\"title\"><a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></td>
+                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></div></td>
                     <td class=\"category\">$category</td>
-                    <td class=\"score\">$score</td>
+                    <td class=\"score\">$score"."점</td>
                 </tr>
             ";
         }

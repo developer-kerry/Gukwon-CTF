@@ -1,3 +1,43 @@
 ul button{
     margin-top:5px;
 }
+
+table{
+    margin-left:50px;
+}
+
+table thead th{
+    border-bottom:1px solid gray;
+}
+
+table tbody tr td{
+    border-bottom:1px solid #C6C6C6;
+}
+
+table .idx{
+    min-width:50px;
+    text-align:center;
+}
+
+table .title{
+    min-width:450px;
+}
+
+table .category{
+    min-width:200px;
+    text-align:center;
+}
+
+table .score{
+    min-width:75px;
+    text-align:center;
+}
+
+table .set{
+    min-width:50px;
+    text-align:center;
+}
+
+#submit{
+    margin-left:50px;
+}

@@ -3,7 +3,7 @@
 
     function AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
         $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, category, setted)
-                VALUES($title, $author, NOW(), $description, $score, $flag, $category, FALSE)";
+                VALUES('$title', '$author', NOW(), '$description', $score, '$flag', '$category', FALSE)";
         mysqli_query($conn, $sql);
 
         $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
@@ -41,7 +41,7 @@
         ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
     }
 
-    function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $hint1Value, $hint2Value){
+    function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $textCategory, $hint1Value, $hint2Value){
         $title = SecureStringProcess($conn, $title);
         $description = SecureStringProcess($conn, $description);
         $flag = null;
@@ -50,11 +50,28 @@
         $hint1 = "";
         $hint2 = "";
 
+        if(strlen($title) == 0 || strlen($description) == 0){
+            ShowAlertWithHistoryBack("제목과 본문 확인 바랍니다.");
+            return;
+        }
+
+        $sql = "SELECT COUNT(*) FROM problem WHERE title = '$title'";
+        $num_title = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
+
+        if($num_title == 1){
+            ShowAlertWithHistoryBack("제목이 같은 문제가 이미 존재합니다.");
+            return;
+        }
+
         if($flag_type == "auto"){
             $flag = md5((string)rand().GetDatetime().(string)rand());
             
-            if($checkedValue == "true"){
+            if($checkedValue == "true" && strlen($textInput) > 0){
                 $answer = SecureStringProcess($conn, $textInput);
+            }
+            else if($checkedValue == "true"){
+                ShowAlertWithHistoryBack("입력값 확인 바랍니다.");
+                return;
             }
         }
         else{
@@ -68,7 +85,11 @@
         }
 
         if($categoryValue == "manual_input"){
-            $category = SecureStringProcess($conn, $textInput);
+            if(strlen($textCategory) == 0){
+                ShowAlertWithHistoryBack("카테고리 입력값 확인 바랍니다.");
+                return;
+            }
+            $category = SecureStringProcess($conn, $textCategory);
         }
         else{
             $category = SecureStringProcess($conn, $categoryValue);
@@ -81,7 +102,7 @@
             $hint1 = SecureStringProcess($conn, $hint1Value);
             $hint2 = SecureStringProcess($conn, $hint2Value);
         }
-        else{
+        else if(strlen($hint1Value) == 0 && strlen($hint2Value) > 0){
             ShowAlertWithHistoryBack("입력값 확인 바랍니다.");
             return;
         }
@@ -95,14 +116,15 @@
     else{
         AddProblem(
             $conn,
-            $_POST['title'], 
+            $_POST['prob_title'], 
             $nickname, 
-            $_POST['description'], 
+            $_POST['prob_description'], 
             $_POST['score'], 
             $_POST['flag_type'], 
-            $_POST['input2flag'], 
+            isset($_POST['input2flag']), 
             $_POST['textInput'],
             $_POST['category'],
+            $_POST['textCategory'],
             $_POST['hint1'], 
             $_POST['hint2']
         );

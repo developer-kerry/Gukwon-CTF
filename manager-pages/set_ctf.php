@@ -107,6 +107,7 @@
                             </div>
                         </li>
                     </ul>
+                    <br>
                     <strong>&nbsp;&nbsp;대회 시작 준비상태로 되돌리기 - 아래 세 항목이 초기화됩니다.</strong><br>
                     <ul>
                         <li>모든 참가자들의 점수</li>
@@ -117,45 +118,12 @@
                 </div>
                 <div class="row_wrap">
                     <h3>문제 리스트</h3>
-                    <table>
-                        <thead>
-                            <th id="idx">번호</th>
-                            <th id="title">제목</th>
-                            <th id="category">분류</th>
-                            <th id="score">점수</th>
-                            <th id="set">출제</th>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $sql = "SELECT idx, title, category, score FROM problem WHERE setted = FALSE";
-                                $result = mysqli_query($conn, $sql);
-
-                                echo "<form action=\"/function/set_ctf.php\" method=\"POST\">";
-                                echo "<input type=\"hidden\" name=\"type\" value=\"set_problem\">";                                
-                                while(($row = mysqli_fetch_assoc($result))){
-                                    $idx = $row['idx'];
-                                    $title = $row['title'];
-                                    $category = $row['category'];
-                                    $score = $row['score'];
-
-                                    echo "
-                                        <tr>
-                                            <td class=\"idx\">$idx</td>
-                                            <td class=\"title\">$title</td>
-                                            <td class=\"category\">$category</td>
-                                            <td class=\"score\">$score</td>
-                                            <td class=\"set\"><input type=\"checkbox\" name=\"checkbox\" value=\"$idx\"></td>
-                                        </tr>
-                                    ";
-                                }
-                                echo "<input type=\"submit\" value=\"선택 완료\">";
-                                echo "</form>";
-                            ?>
-                        </tbody>
-                    </table>
+                    <?php
+                        include_once($_SERVER['DOCUMENT_ROOT']."/element/set_ctf_table.php");
+                    ?>
                 </div>
                 <div class="row_wrap">
-                    <h3>현재 출제된 문제들</h3>
+                    <h3>현재 출제된 문제 현황</h3>
                     <?php
                         ProblemGrid::Print($conn, $stdid, "view");
                     ?>
