@@ -39,17 +39,21 @@ CREATE TABLE problem(
     upload_datetime DATETIME NOT NULL,
     description TEXT NOT NULL,
     score INT NOT NULL,
-    flag TEXT NOT NULL,
-    solvers TEXT,
+    flag TEXT NOT NULL
     category TEXT NOT NULL,
     setted BOOLEAN NOT NULL
+);
+
+CREATE TABLE logs(
+    prob_idx INT NOT NULL PRIMARY KEY,
+    solvers TEXT NOT NULL,
+    viewers TEXT NOT NULL
 );
 
 CREATE TABLE hint(
     prob_idx INT NOT NULL PRIMARY KEY,
     description TEXT NOT NULL,
-    level BOOLEAN NOT NULL,
-    viewers TEXT NOT NULL
+    level BOOLEAN NOT NULL
 );
 
 CREATE TABLE answer_flag(

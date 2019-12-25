@@ -2,10 +2,10 @@
     include("./include.php");
     
     if(!$is_manager){
-        ShowAlert("잘못된 접근입니다.");
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
     else if(empty($_POST['title']) || empty($_POST['description'])){
-        ShowAlert("빈칸이 있습니다.");
+        ShowAlertWithHistoryBack("빈칸이 있습니다.");
     }
     else{
         $title = SecureStringProcess($conn, $_POST['title']);

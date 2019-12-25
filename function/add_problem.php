@@ -2,8 +2,8 @@
     include("include.php");
 
     function AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
-        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, setted)
-                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, FALSE)";
+        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, category, setted)
+                VALUES($title, $author, NOW(), $description, $score, $flag, $category, FALSE)";
         mysqli_query($conn, $sql);
 
         $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
@@ -21,21 +21,22 @@
 
             $sql = "UPDATE problem SET description = '$description' WHERE idx=$prob_idx";
             mysqli_query($conn, $sql);
-        }
-        
-        $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
-        mysqli_query($conn, $sql);
 
-        
+            $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
+            mysqli_query($conn, $sql);
+        }
 
         if($hint1 != ""){
-            $sql = "INSERT INTO hint VALUES($prob_idx, '$hint1', 0, '')";
+            $sql = "INSERT INTO hint VALUES($prob_idx, '$hint1', 0)";
             
             if($hint2 != ""){
-                $sql .= ", ($prob_idx, '$hint2', 1, '')";
+                $sql .= ", ($prob_idx, '$hint2', 1)";
             }
             mysqli_query($conn, $sql);
         }
+
+        $sql = "INSERT INTO logs VALUES($prob_idx, '', '')";
+        mysqli_query($conn, $sql);
 
         ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
     }
@@ -88,17 +89,22 @@
         AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
 
-    AddProblem(
-        $conn,
-        $_POST['title'], 
-        $nickname, 
-        $_POST['description'], 
-        $_POST['score'], 
-        $_POST['flag_type'], 
-        $_POST['input2flag'], 
-        $_POST['textInput'],
-        $_POST['category'],
-        $_POST['hint1'], 
-        $_POST['hint2']
-    );
+    if(!$is_manager){
+        ShowAlertWithMove2Index("잘못된 접근입니다.");
+    }
+    else{
+        AddProblem(
+            $conn,
+            $_POST['title'], 
+            $nickname, 
+            $_POST['description'], 
+            $_POST['score'], 
+            $_POST['flag_type'], 
+            $_POST['input2flag'], 
+            $_POST['textInput'],
+            $_POST['category'],
+            $_POST['hint1'], 
+            $_POST['hint2']
+        );
+    }
 ?>

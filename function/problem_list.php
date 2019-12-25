@@ -3,7 +3,7 @@
         private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx, string $mode) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
-            if(substr_count($solvers, (string)$idx) == 1 || $mode == "view"){
+            if(substr_count($solvers, (string)$stdid) == 1 || $mode == "view"){
                 return "
                     <div class=\"solved_cell\">
                         <strong class=\"prob_title\">$title</strong>
@@ -39,7 +39,7 @@
 
         private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
             $cells = [];
-            $sql = "SELECT title, score, solvers, idx FROM problem WHERE setted=TRUE";
+            $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted FROM problem AS prob LEFT JOIN logs WHERE prob.idx = logs.idx)tmp WHERE setted=TRUE ";
             $result = mysqli_query($conn, $sql);
 
             while(($row = mysqli_fetch_assoc($result))){
