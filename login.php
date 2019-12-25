@@ -1,24 +1,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>
-            .row_wrap .login_form input{
-                width:200px;
-                margin-left:30px;
-            }
-            
-            .top_nav{ 
-                background-color:#F0F0F0;
-            }
-            
-            .button a:hover{
-                background-color:#D4D4D4;
-            }
-            
-            .button a:active{
-                background-color:#9E9E9E;
-            }
-        </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/login.css">
         <title>로그인</title>

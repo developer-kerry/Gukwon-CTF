@@ -31,8 +31,8 @@
         return $datetime->format("Y-m-d H:i:s");
     }
 
-    function SecureStringProcess($str){
-        return mysqli_real_escape_string($conn, htmlspecialchars($str));
+    function SecureStringProcess($conn, $str){
+        return mysqli_real_escape_string($conn, nl2br(htmlspecialchars($str)));
     }
 
     $sql = "SELECT * FROM contest_status";

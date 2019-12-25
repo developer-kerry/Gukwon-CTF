@@ -8,46 +8,6 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
-            
-            table thead th{
-                border-bottom:1px solid gray;
-            }
-
-            table tbody tr td{
-                border-bottom:1px solid #C6C6C6;
-            }
-
-            #rank{
-                min-width:45px;
-            }
-
-            #nickname{
-                min-width:150px;
-            }
-
-            #score{
-                min-width:75px;
-            }
-
-            #last_auth{
-                min-width:200px;
-            }
-
-            #rank{
-                margin-left:30px;
-            }
-
-            table tr .rank{
-                text-align:center;
-            }
-
-            table tr .score{
-                text-align:center;
-            }
-
-            table{
-                padding:none;
-            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/show_rank.css">
@@ -82,7 +42,7 @@
                         array_push($arr, [$nickname, $score]);
 
                         if($is_session_setted && $row['nickname'] == $_SESSION['nickname']){
-                            echo "<strong>현재 ".$nickname."님의 순위는 ".$rank."위(".$row['score']."점)입니다.</strong><br><br>";
+                            echo "<strong>&nbsp;&nbsp;현재 ".$nickname."님의 순위는 ".$rank."위(".$row['score']."점)입니다.</strong><br><br>";
                         }
 
                         $table_content .= "

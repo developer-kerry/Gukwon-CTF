@@ -14,7 +14,6 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/mypage.css">
         <title>대회 진행상황 관리</title>
     </head>
     <body>

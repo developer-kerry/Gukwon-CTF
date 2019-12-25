@@ -1,0 +1,63 @@
+.row_wrap .button{
+    width:100px;
+}
+
+.row_wrap .button{
+    margin-top:100px;
+    margin-left:30px;
+}
+
+table thead th{
+    border-bottom:1px solid gray;
+}
+
+table tbody tr td{
+    border-bottom:1px solid #C6C6C6;
+}
+
+#index{
+    min-width:45px;
+}
+
+#title{
+    min-width:300px;
+}
+
+#author{
+    min-width:150px;
+}
+
+#datetime{
+    min-width:200px;
+}
+
+table{
+    margin-left:30px;
+}
+
+table tr .index{
+    text-align:center;
+}
+
+table tr .author{
+    text-align:center;
+}
+
+table tr .datetime{
+    text-align:center
+}
+
+table tbody a{
+    text-decoration:none;
+    color:black;
+}
+
+table tbody a:hover{
+    text-decoration:underline;
+    background-color:#D7D7D7;
+}
+
+table tbody a:active{
+    text-decoration:underline;
+    background-color:#B0B0B0;
+}

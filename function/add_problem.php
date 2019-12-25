@@ -2,8 +2,8 @@
     include("include.php");
 
     function AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
-        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, try_cnt, success_cnt, setted)
-                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, 0, 0, FALSE)";
+        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, setted)
+                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, FALSE)";
         mysqli_query($conn, $sql);
 
         $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
@@ -26,12 +26,23 @@
         $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
         mysqli_query($conn, $sql);
 
+        
+
+        if($hint1 != ""){
+            $sql = "INSERT INTO hint VALUES($prob_idx, '$hint1', 0, '')";
+            
+            if($hint2 != ""){
+                $sql .= ", ($prob_idx, '$hint2', 1, '')";
+            }
+            mysqli_query($conn, $sql);
+        }
+
         ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
     }
 
     function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $hint1Value, $hint2Value){
-        $title = SecureStringProcess($title);
-        $description = SecureStringProcess(nl2br($description));
+        $title = SecureStringProcess($conn, $title);
+        $description = SecureStringProcess($conn, $description);
         $flag = null;
         $answer = null;
         $category = null;
@@ -42,12 +53,12 @@
             $flag = md5((string)rand().GetDatetime().(string)rand());
             
             if($checkedValue == "true"){
-                $answer = SecureStringProcess($textInput);
+                $answer = SecureStringProcess($conn, $textInput);
             }
         }
         else{
             if(strlen($textInput) > 8){
-                $flag = SecureStringProcess(($textInput));
+                $flag = SecureStringProcess($conn, $textInput);
             }
             else{
                 ShowAlertWithHistoryBack("Flag는 9자 이상이어야 합니다.");
@@ -56,18 +67,18 @@
         }
 
         if($categoryValue == "manual_input"){
-            $category = SecureStringProcess(htmlspecialchars($textInput));
+            $category = SecureStringProcess($conn, $textInput);
         }
         else{
-            $category = SecureStringProcess(htmlspecialchars($categoryValue));
+            $category = SecureStringProcess($conn, $categoryValue);
         }
 
         if(strlen($hint1Value) > 0 && strlen($hint2Value) == 0){
-            $hint1 = SecureStringProcess($hint1Value);
+            $hint1 = SecureStringProcess($conn, $hint1Value);
         }
         else if(strlen($hint1Value) > 0 && strlen($hint2Value) > 0){
-            $hint1 = SecureStringProcess($hint1Value);
-            $hint2 = SecureStringProcess($hint2Value);
+            $hint1 = SecureStringProcess($conn, $hint1Value);
+            $hint2 = SecureStringProcess($conn, $hint2Value);
         }
         else{
             ShowAlertWithHistoryBack("입력값 확인 바랍니다.");

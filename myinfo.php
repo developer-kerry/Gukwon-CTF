@@ -12,26 +12,9 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
-
-            .menu .menu_link{
-                margin-left:15px;
-                text-decoration:none;
-                color:black;
-            }
-
-            .menu .menu_link:hover{
-                background-color:#D4D4D4;
-            }
-
-            .menu .menu_link:active{
-                background-color:#9E9E9E;
-            }
-
-            .menu_description{
-                margin-left:30px;
-            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
+        <link rel="stylesheet" href="/style/myinfo.css">
         <title>마이페이지</title>
     </head>
     <body>

@@ -13,29 +13,7 @@
         <style>
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
-            ?>
-
-            #flag_input{
-                width:400px;
-                height:30px;
-            }
-
-            #submit{
-                width:50px;
-                height:30px;
-            }
-
-            #auth_form{
-                width:460px;
-                margin-left:auto;
-                margin-right:auto;
-                padding-bottom:25px;
-            }
-
-            .function{
-                border-bottom:1px solid #CECECE;
-                margin-bottom:30px;
-            }            
+            ?>            
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/problem_list.css">

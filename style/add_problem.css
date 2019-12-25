@@ -1,0 +1,67 @@
+.problem h4{
+    margin-left:15px;
+}
+
+.problem input, .problem textarea, .problem input, .problem .combobox{
+    margin-left:25px;
+}
+
+.problem .radio{
+    margin-top:10px;
+}
+
+#submit{
+    margin-top:3px;
+}
+
+#textInput{
+    margin-top:3px;
+}
+
+.problem_form{
+    width:750px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#title{
+    width:750px;
+    height:50px;
+    font-size:20px;
+}
+
+#description{
+    width:750px;
+    height:500px;
+    resize:none;
+}
+
+#textInput, #hint1, #hint2{
+    margin-bottom:3px;
+    width:750px;
+}
+
+table{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table thead th{
+    border-bottom:1px solid gray;
+}
+
+table .idx{
+    min-width:50px;
+}
+
+table .title{
+    min-width:450px;
+}
+
+table .category{
+    min-width:200px;
+}
+
+table .score{
+    min-width:75px;
+}
