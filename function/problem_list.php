@@ -118,7 +118,7 @@
             $subject_count = count($subjects);
 
             if($subject_count == 0){
-                $result = "아직 문제가 등록되지 않았습니다.";
+                $result = "&nbsp;&nbsp;아직 문제가 등록되지 않았습니다.";
             }
             else{
                 for($i = 0; $i < count($subjects); $i++){

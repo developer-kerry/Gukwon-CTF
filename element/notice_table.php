@@ -10,7 +10,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th id=\"index\">번호</th>
+                        <th id=\"idx\">번호</th>
                         <th id=\"title\">제목</th>
                         <th id=\"author\">작성자</th>
                         <th id=\"datetime\">작성 시각</th>

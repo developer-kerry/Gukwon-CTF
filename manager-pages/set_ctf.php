@@ -1,5 +1,6 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
+    include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
 
     if(!$is_manager){
         ShowAlertWithMove2Index("잘못된 접근입니다.");
@@ -14,7 +15,7 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/mypage.css">
+        <link rel="stylesheet" href="/style/set_ctf.css">
         <title>대회 준비 메뉴</title>
     </head>
     <body>
@@ -106,20 +107,19 @@
                             </div>
                         </li>
                     </ul>
-                    <strong>&nbsp;&nbsp;대회 시작 준비상태로 되돌리기</strong>
-                    &nbsp;&nbsp;&nbsp;이 버튼을 클릭하면, 다음 내용들이 초기화됩니다.
+                    <strong>&nbsp;&nbsp;대회 시작 준비상태로 되돌리기 - 아래 세 항목이 초기화됩니다.</strong><br>
                     <ul>
                         <li>모든 참가자들의 점수</li>
                         <li>문제 풀이 기록</li>
                         <li>힌트 열람 기록</li>
-                        <button onclick="location.href='/function/truncate.php?handle=reset_ctf';">초기화 진행</button>
+                        <button onclick="location.href='/function/truncate.php?handle=reset_ctf';">대회 시작 준비상태로 복원</button>
                     </ul>
                 </div>
                 <div class="row_wrap">
                     <h3>문제 리스트</h3>
                     <table>
                         <thead>
-                            <th id="idx">idx</th>
+                            <th id="idx">번호</th>
                             <th id="title">제목</th>
                             <th id="category">분류</th>
                             <th id="score">점수</th>

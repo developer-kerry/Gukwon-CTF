@@ -76,13 +76,27 @@ body{
     margin-left:25px;
 }
 
-.button img{
+.nav_button img{
     width:17px;
     height:auto;
+}
+
+.nav_button a{
+    text-decoration:none;
+    color:black;
+    background-color:none;
 }
 
 .button a{
     text-decoration:none;
     color:black;
     background-color:none;
+}
+
+.button a:hover{ 
+    background-color:#D4D4D4; 
+}
+
+.button a:active{ 
+    background-color:#9E9E9E; 
 }
