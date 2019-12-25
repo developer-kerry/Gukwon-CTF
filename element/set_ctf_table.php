@@ -30,9 +30,9 @@
             echo "
                 <tr>
                     <td class=\"idx\">$idx</td>
-                    <td class=\"title\">$title</td>
+                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></div></td>
                     <td class=\"category\">$category</td>
-                    <td class=\"score\">$score</td>
+                    <td class=\"score\">$score"."점</td>
                     <td class=\"set\"><input type=\"checkbox\" name=\"checkbox\" value=\"$idx\"></td>
                 </tr>
             ";
