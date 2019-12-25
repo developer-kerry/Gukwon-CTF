@@ -71,6 +71,7 @@
 
         if($sql != null){
             mysqli_query($conn, $sql);
+            ShowAlertWithMoveLocation("성공!", "/manager-pages/set_ctf.php");
         }
     }
 ?>
