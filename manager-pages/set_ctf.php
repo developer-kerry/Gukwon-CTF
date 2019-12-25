@@ -25,10 +25,27 @@
         </div>
         <div class="description">
             <div class="plain_description">
-                <h3>현재 출제된 문제들</h3>
-                <?php
-                    ProblemGrid::Print($conn, $stdid, "view");
-                ?>
+                <div class="row_wrap">
+                    <h3>현재 출제된 문제들</h3>
+                    <?php
+                        ProblemGrid::Print($conn, $stdid, "view");
+                    ?>
+                </div>
+                <div class="row_wrap">
+                    <h3>문제 리스트</h3>
+                    <table>
+                        <thead>
+                            <th id="idx">idx</th>
+                            <th id="title">제목</th>
+                            <th id="category">분류</th>
+                            <th id="score">점수</th>
+                            <th id="success_ratio">정답률</th>
+                            <th id="idx">출제하기</th>
+                        </thead>
+                        <!-- Tbody 그려라... -->
+                        <!-- 정답률 삭제,,,,,, -->
+                    </table>
+                </div>
             </div>
         </div>
     </body>

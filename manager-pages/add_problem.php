@@ -163,15 +163,39 @@
                     <table>
                         <thead>
                             <th id="idx">idx</th>
-                            <th id="category">분류</th>
                             <th id="title">제목</th>
-                            <th id="author">작성자</th>
+                            <th id="category">분류</th>
                             <th id="score">점수</th>
+                            <th id="success_ratio">정답률</th>
                             <th id="upload">작성일</th>
                         </thead>
                         <tbody>
                             <?php
-                                ProblemList::Print("view");
+                                $sql = "SELECT idx, title, category, score, upload_datetime as upload, try_cnt, success_cnt FROM problem ";
+            
+                                if($mode == "set"){
+                                    $sql .= "WHERE setted=FALSE";
+                                }
+                    
+                                $result = mysqli_query($conn, $sql);
+                    
+                                while(($row = mysqli_fetch_assoc($result))){
+                                    $idx = $row['idx'];
+                                    $title = $row['title'];
+                                    $category = $row['category'];
+                                    $score = $row['score'];
+                                    $success_ratio = (((double)$row['success_cnt'] / (double)$row['try_cnt']) * 100);
+                                    $upload = $row['upload'];
+                    
+                                    echo "
+                                        <td class=\"idx\">$idx</td>
+                                        <td class=\"title\"><a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></td>
+                                        <td class=\"category\">$category</td>
+                                        <td class=\"score\">$score</td>
+                                        <td class=\"success_ratio\">$success_ratio</td>
+                                        <td class=\"upload\">$upload</td>
+                                    ";
+                                }
                             ?>
                         </tbody>
                     </table>

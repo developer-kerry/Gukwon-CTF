@@ -8,7 +8,7 @@
 
     function ShowAlertWithMoveLocation($msg, $location){
         ShowAlert($msg);
-        echo "<script>location.href=\"$location\";</script>";
+        MoveLocation($location);
     }
 
     function ShowAlertWithHistoryBack($msg){

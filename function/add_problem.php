@@ -1,9 +1,9 @@
 <?php
     include("include.php");
 
-    function AddProblem_Process($title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
-        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, setted)
-                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, FALSE)";
+    function AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
+        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, solvers, category, hint1, hint2, try_cnt, success_cnt, setted)
+                VALUES($title, $author, NOW(), $description, $score, $flag, '', $category, $hint1, $hint2, 0, 0, FALSE)";
         mysqli_query($conn, $sql);
 
         $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
@@ -26,10 +26,10 @@
         $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
         mysqli_query($conn, $sql);
 
-        ShowAlertWithMoveLoaction("문제 등록 완료!", "/manager-pages/add_problem.php");
+        ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
     }
 
-    function AddProblem($title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $hint1Value, $hint2Value){
+    function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $hint1Value, $hint2Value){
         $title = SecureStringProcess($title);
         $description = SecureStringProcess(nl2br($description));
         $flag = null;
@@ -74,10 +74,11 @@
             return;
         }
 
-        AddProblem_Process($title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
+        AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
 
     AddProblem(
+        $conn,
         $_POST['title'], 
         $nickname, 
         $_POST['description'], 

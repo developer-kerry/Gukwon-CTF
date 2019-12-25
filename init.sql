@@ -44,6 +44,8 @@ CREATE TABLE problem(
     category TEXT NOT NULL,
     hint1 TEXT NOT NULL,
     hint2 TEXT NOT NULL,
+    try_cnt INT NOT NULL,
+    success_cnt INT NOT NULL,
     setted BOOLEAN NOT NULL
 );
 

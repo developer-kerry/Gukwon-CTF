@@ -129,34 +129,4 @@
             echo $result;
         }
     }
-
-    class ProblemList{
-        static function Print($mode){
-            $sql = "SELECT idx, category, title, author, score, upload_datetime as upload FROM problem ";
-            
-            if($mode == "set"){
-                $sql .= "WHERE setted=TRUE";
-            }
-
-            $result = mysqli_query($conn, $sql);
-
-            while(($row = mysqli_fetch_assoc($result))){
-                $idx = $row['idx'];
-                $category = $row['category'];
-                $title = $row['title'];
-                $author = $row['author'];
-                $score = $row['score'];
-                $upload = $row['upload'];
-
-                echo "
-                    <td class=\"idx\">$idx</td>
-                    <td class=\"category\">$category</td>
-                    <td class=\"title\"><a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></td>
-                    <td class=\"author\">$author</td>
-                    <td class=\"score\">$score</td>
-                    <td class=\"upload\">$upload</td>
-                ";
-            }
-        }
-    }
 ?>
