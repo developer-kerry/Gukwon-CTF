@@ -28,7 +28,7 @@
             echo "
                 <tr>
                     <td class=\"idx\">$idx</td>
-                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></div></td>
+                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?idx=$idx\">$title</a></div></td>
                     <td class=\"category\">$category</td>
                     <td class=\"score\">$score"."점</td>
                 </tr>

@@ -15,6 +15,7 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
+        <link rel="stylesheet" href="/style/problem_list.css">
         <link rel="stylesheet" href="/style/set_ctf.css">
         <title>대회 준비 메뉴</title>
     </head>

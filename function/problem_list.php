@@ -1,6 +1,6 @@
 <?php
     class ProblemGrid{
-        private static function GenerateCell(int $stdid, string $title, int $score, int $solvers, int $idx, string $mode) : string{
+        private static function GenerateCell(int $stdid, string $title, int $score, string $solvers, int $idx, string $mode) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
             if(substr_count($solvers, (string)$stdid) == 1 || $mode == "view"){
@@ -15,7 +15,27 @@
                         <br>
                         <br>
                         <br>
-                        <a href=\"/participant-pages/solve_problem.php?mode=$mode&idx=$idx\">[보기]</a>
+                        <a href=\"/solve_problem.php?idx=$idx\">[보기]</a>
+                    </div>
+                ";
+            }
+            else if($mode == "set"){
+                return "
+                    <div class=\"solved_cell\">
+                        <strong class=\"prob_title\">$title</strong>
+                        <br>
+                        <span class=\"score\">배점: ".$score."점</span><br>
+                        <span class=\"solvers\">성공한 사람들: ".$cnt_solvers."명<span>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <form action=\"/function/set_ctf.php\" method=\"POST\">
+                            <input type=\"hidden\" name=\"mode\" value=\"unset\">
+                            <input type=\"hidden\" name=\"idx\" value=\"$idx\">
+                            <input type=\"submit\" value=\"출제 취소\">
+                        </form>
                     </div>
                 ";
             }
@@ -31,7 +51,7 @@
                         <br>
                         <br>
                         <br>
-                        <a href=\"/participant-pages/solve_problem.php?mode=$mode&idx=$idx\">[풀기]</a>
+                        <a href=\"/solve_problem.php?idx=$idx\">[풀기]</a>
                     </div>
                 ";
             }
@@ -39,7 +59,7 @@
 
         private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
             $cells = [];
-            $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted FROM problem AS prob LEFT JOIN logs WHERE prob.idx = logs.idx)tmp WHERE setted=TRUE ";
+            $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted FROM problem AS prob LEFT JOIN logs ON prob.idx = logs.prob_idx)tmp WHERE setted=TRUE ";
             $result = mysqli_query($conn, $sql);
 
             while(($row = mysqli_fetch_assoc($result))){
@@ -109,6 +129,11 @@
             while(($row = mysqli_fetch_assoc($result))){
                 $category = $row['category'];
                 $cells = self::GetProblemCellsByCategory($conn, $stdid, $category, $mode);
+
+                if(count($cells) == 0){
+                    continue;
+                }
+
                 $rows = self::GenerateProblemRows($cells);
                 $subject = self::GenerateSubject($category, $rows);
                 array_push($subjects, $subject);

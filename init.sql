@@ -52,8 +52,8 @@ CREATE TABLE logs(
 
 CREATE TABLE hint(
     prob_idx INT NOT NULL PRIMARY KEY,
-    description TEXT NOT NULL,
-    level BOOLEAN NOT NULL
+    hint1 TEXT NOT NULL,
+    hint2 TEXT NOT NULL
 );
 
 CREATE TABLE answer_flag(

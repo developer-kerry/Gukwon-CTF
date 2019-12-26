@@ -26,13 +26,20 @@
             mysqli_query($conn, $sql);
         }
 
+        $sql = "INSERT INTO hint VALUES($prob_idx, ";
         if($hint1 != ""){
-            $sql = "INSERT INTO hint VALUES($prob_idx, '$hint1', 0)";
+            $sql .= "'$hint1', ";
             
             if($hint2 != ""){
-                $sql .= ", ($prob_idx, '$hint2', 1)";
+                $sql .= "'$hint2')";
+            }
+            else{
+                $sql .= "'')";
             }
             mysqli_query($conn, $sql);
+        }
+        else{
+            $sql .= "'', '')";
         }
 
         $sql = "INSERT INTO logs VALUES($prob_idx, '', '')";

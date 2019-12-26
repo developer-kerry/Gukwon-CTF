@@ -9,7 +9,7 @@
     else{
         echo "
             <form action=\"/function/set_ctf.php\" method=\"POST\">
-                <input type=\"hidden\" name=\"type\" value=\"set_problem\">
+                <input type=\"hidden\" name=\"mode\" value=\"set\">
                 <table>
                     <thead>
                         <th id=\"idx\">번호</th>
@@ -30,7 +30,7 @@
             echo "
                 <tr>
                     <td class=\"idx\">$idx</td>
-                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?mode=view&idx=$idx\">$title</a></div></td>
+                    <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?idx=$idx\">$title</a></div></td>
                     <td class=\"category\">$category</td>
                     <td class=\"score\">$score"."점</td>
                     <td class=\"set\"><input type=\"checkbox\" name=\"checkbox\" value=\"$idx\"></td>
@@ -42,7 +42,7 @@
                     </tbody>
                 </table>
                 <br>
-                <input type=\"submit\" id=\"submit\" value=\"선택 완료\">
+                <input type=\"submit\" id=\"select_done\" value=\"선택 완료\">
             </form>
         ";
     }

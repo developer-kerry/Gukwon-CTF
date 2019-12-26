@@ -61,3 +61,8 @@ table tbody a:active{
     text-decoration:underline;
     background-color:#B0B0B0;
 }
+
+img{
+    width:17px;
+    height:auto;
+}
