@@ -29,6 +29,8 @@
                     <?php
                         $idx = SecureStringProcess($conn, $_GET['idx']);
 
+                        $sql = 
+
                         $sql = "SELECT
                                     prob.idx,
                                     prob.title,
@@ -40,21 +42,23 @@
                                     tmp.hint2,
                                     tmp.viewers
                                 FROM
-                                    (
-                                        SELECT 
-                                            hint.prob_idx, 
-                                            hint.hint1, 
-                                            hint.hint2, 
-                                            logs.viewers 
-                                        FROM hint 
-                                        LEFT JOIN logs 
-                                        ON hint.prob_idx = logs.prob_idx
-                                    )tmp
-                                LEFT JOIN tmp
+                                    problem AS prob
+                                LEFT JOIN 
+                                (
+                                    SELECT 
+                                        hint.prob_idx, 
+                                        hint.hint1, 
+                                        hint.hint2, 
+                                        logs.viewers 
+                                    FROM hint 
+                                    LEFT JOIN logs 
+                                    ON hint.prob_idx = logs.prob_idx
+                                ) AS tmp
                                 ON prob.idx = tmp.prob_idx
                         ";
 
                         $result = mysqli_query($conn, $sql);
+                        echo mysqli_error($conn);
 
                         if(mysqli_num_rows($result) == 0){
                             ShowAlertWithHistoryBack("잘못된 접근입니다.");
@@ -68,11 +72,11 @@
                             $score = $row['score'];
                             $description = $row['description'];
 
-                            $hint1 = $_row['hint1'];
-                            $hint2 = $_row['hint2'];
+                            $hint1 = $row['hint1'];
+                            $hint2 = $row['hint2'];
 
-                            $is_hint1_opened = substr_count($_row['viewers'], ",$stdid-hint1");
-                            $is_hint2_opened = substr_count($_row['viewers'], ",$stdid-hint2");
+                            $is_hint1_opened = substr_count($row['viewers'], ",$stdid-hint1");
+                            $is_hint2_opened = substr_count($row['viewers'], ",$stdid-hint2");
 
                             echo "
                                 <div id=\"header\">
