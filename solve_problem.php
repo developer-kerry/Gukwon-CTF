@@ -28,35 +28,64 @@
                 <div class="row_wrap">
                     <?php
                         $idx = SecureStringProcess($conn, $_GET['idx']);
+                        $sql = null;
 
-                        $sql = 
-
-                        $sql = "SELECT
-                                    prob.idx,
-                                    prob.title,
-                                    prob.author,
-                                    prob.upload_datetime as up,
-                                    prob.score,
-                                    prob.description,
-                                    tmp.hint1,
-                                    tmp.hint2,
-                                    tmp.viewers
-                                FROM
-                                    problem AS prob
-                                LEFT JOIN 
-                                (
-                                    SELECT 
-                                        hint.prob_idx, 
-                                        hint.hint1, 
-                                        hint.hint2, 
-                                        logs.viewers 
-                                    FROM hint 
-                                    LEFT JOIN logs 
-                                    ON hint.prob_idx = logs.prob_idx
-                                ) AS tmp
-                                ON prob.idx = tmp.prob_idx
-                        ";
-
+                        if($is_manager){
+                            $sql = "SELECT
+                                        prob.idx,
+                                        prob.title,
+                                        prob.author,
+                                        prob.upload_datetime as up,
+                                        prob.score,
+                                        prob.description,
+                                        prob.flag,
+                                        tmp.hint1,
+                                        tmp.hint2,
+                                        tmp.viewers
+                                    FROM
+                                        problem AS prob
+                                    LEFT JOIN 
+                                    (
+                                        SELECT 
+                                            hint.prob_idx, 
+                                            hint.hint1, 
+                                            hint.hint2, 
+                                            logs.viewers 
+                                        FROM hint 
+                                        LEFT JOIN logs 
+                                        ON hint.prob_idx = logs.prob_idx
+                                    ) AS tmp
+                                    ON prob.idx = tmp.prob_idx
+                            ";
+                        }
+                        else{
+                            $sql = "SELECT
+                                        prob.idx,
+                                        prob.title,
+                                        prob.author,
+                                        prob.upload_datetime as up,
+                                        prob.score,
+                                        prob.description,
+                                        tmp.hint1,
+                                        tmp.hint2,
+                                        tmp.viewers
+                                    FROM
+                                        problem AS prob
+                                    LEFT JOIN 
+                                    (
+                                        SELECT 
+                                            hint.prob_idx, 
+                                            hint.hint1, 
+                                            hint.hint2, 
+                                            logs.viewers 
+                                        FROM hint 
+                                        LEFT JOIN logs 
+                                        ON hint.prob_idx = logs.prob_idx
+                                    ) AS tmp
+                                    ON prob.idx = tmp.prob_idx
+                            ";
+                        }
+                        
                         $result = mysqli_query($conn, $sql);
                         echo mysqli_error($conn);
 
@@ -78,18 +107,23 @@
                             $is_hint1_opened = substr_count($row['viewers'], ",$stdid-hint1");
                             $is_hint2_opened = substr_count($row['viewers'], ",$stdid-hint2");
 
+                            if($is_hint1_opened){
+                                $score /= 2;
+                                if($is_hint2_opened){
+                                    $score /= 2;
+                                }
+                            }
+
                             echo "
+                                <h2>$title</h2>
                                 <div id=\"header\">
-                                    <h2>$title</h2>
                                     <strong>작성자: $author</strong><br>
                                     <strong>작성시: $uploaded</strong><br>
                                     <strong>배점: $score"."점</strong>
-                                </div>
-                                <p>$description</p>
-                            ";
+                            ".(($is_manager) ? "<br><strong>flag={".$row['flag']."}</strong>" : "")."<br><br>";
 
-                            if($is_hint1_opened){
-                                echo "<div id=\"hint1\">$hint1</div>";
+                            if($is_hint1_opened || $is_manager){
+                                echo "<div id=\"hint1\"><strong>첫 번째 힌트: $hint1</strong></div>";
                             }
                             else{
                                 echo "
@@ -101,8 +135,8 @@
                                 ";
                             }
 
-                            if($is_hint2_opened){
-                                echo "<div id=\"hint2\">$hint2</div>";
+                            if($is_hint2_opened || $is_manager){
+                                echo "<div id=\"hint2\"><strong>두 번째 힌트: $hint2</strong></div>";
                             }
                             else{
                                 echo "
@@ -113,6 +147,10 @@
                                     </form>
                                 ";
                             }
+
+                            echo "
+                                </div>
+                                <p id=\"description\">$description</p>";
                         }
                     ?>
                 </div>

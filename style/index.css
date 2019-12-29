@@ -17,6 +17,7 @@ table thead th{
 
 table .title{
     min-width:250px;
+    margin-left:5px;
 }
 
 table .upload_datetime{

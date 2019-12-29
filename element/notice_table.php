@@ -36,7 +36,7 @@
                 <tr>
                     <td class=\"index\">$idx</td>
                     <td class=\"title\">
-                        &nbsp;&nbsp;<a href=\"/noticeviewer.php?idx=$idx\">$title</a>
+                        <a href=\"/noticeviewer.php?idx=$idx\">$title</a>
                     </td>
                     <td class=\"author\">$author</td>
                     <td class=\"datetime\">$upload_datetime</td>

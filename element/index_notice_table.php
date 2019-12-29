@@ -33,7 +33,7 @@
             echo "
                 <tr>
                     <td class=\"title\">
-                        &nbsp;&nbsp;<a href=\"/noticeviewer.php?idx=$idx\">$title</a>
+                        <a href=\"/noticeviewer.php?idx=$idx\">$title</a>
                     </td>
                     <td class=\"upload_datetime\">$upload_datetime</td>
                 </tr>
