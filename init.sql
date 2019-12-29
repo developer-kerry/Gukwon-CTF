@@ -4,8 +4,8 @@ USE gukwon_ctf;
 CREATE TABLE user_info(
     id TEXT NOT NULL,
     pwd_hash TEXT NOT NULL,
-    nickname VARCHAR(16) NOT NULL,
-    stdid INT NOT NULL PRIMARY KEY,
+    name VARCHAR(10) NOT NULL,
+    nickname VARCHAR(16) NOT NULL PRIMARY KEY,
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
@@ -14,23 +14,19 @@ CREATE TABLE user_info(
 
 CREATE TABLE contest_status(
     is_on_contest BOOLEAN NOT NULL,
-    start_datetime DATETIME NOT NULL
+    start_datetime DATETIME NOT NULL,
+    is_on_managersigning BOOLEAN NOT NULL,
+    is_on_participantsigning BOOLEAN NOT NULL
 );
 
 CREATE TABLE access_token(
     token TEXT NOT NULL,
-    stdid INT NOT NULL,
-    nickname TEXT NOT NULL,
+    name VARCHAR(10) NOT NULL,
+    nickname VARCHAR(16) NOT NULL,
     expire_datetime DATETIME NOT NULL,
     is_manager BOOLEAN NOT NULL
 );
 
-CREATE TABLE auth_code(
-    stdid INT,
-    code VARCHAR(7) NOT NULL PRIMARY KEY,
-    is_manager BOOLEAN NOT NULL,
-    is_superuser BOOLEAN NOT NULL
-);
 
 CREATE TABLE problem(
     idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

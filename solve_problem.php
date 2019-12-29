@@ -104,8 +104,8 @@
                             $hint1 = $row['hint1'];
                             $hint2 = $row['hint2'];
 
-                            $is_hint1_opened = substr_count($row['viewers'], ",$stdid-hint1");
-                            $is_hint2_opened = substr_count($row['viewers'], ",$stdid-hint2");
+                            $is_hint1_opened = substr_count($row['viewers'], ",$nickname-hint1");
+                            $is_hint2_opened = substr_count($row['viewers'], ",$nickname-hint2");
 
                             if($is_hint1_opened){
                                 $score /= 2;

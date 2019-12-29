@@ -36,7 +36,7 @@
             <div class="plain_description">
                 <h3>문제 리스트</h3>
                 <?php
-                    ProblemGrid::Print($conn, $stdid, "solve");
+                    ProblemGrid::Print($conn, $nickname, "solve");
                 ?>
             </div>
         </div>

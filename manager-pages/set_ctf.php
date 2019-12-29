@@ -30,39 +30,6 @@
         <div class="description">
             <div class="plain_description">
                 <div class="row_wrap">
-                    <h3>인증번호 관련 메뉴</h3>
-                    <form action="/function/generate_authcode.php" method="POST"><!-- 파일 생성도 아직 안함 -->
-                        <input type="radio" name="code_type" value="manager"> 관리자 인증번호
-                        <input type="radio" name="code_type" value="participant"> 참가자 인증번호<br>
-                        <input type="number" name="count" placeholder="발급 개수"><br>
-                        <input type="submit" value="발급">
-                    </form>
-                </div>
-                <div class="row_wrap">
-                    <h3>초기화 관련 메뉴</h3>
-                    <strong>&nbsp;&nbsp;인증번호 관련</strong>
-                    <ul>
-                        <li>
-                            <div class="button">
-                                <a href="/function/truncate.php?target=auth_code&mode=all">
-                                    인증번호 전체 삭제
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="button">
-                                <a href="/function/truncate.php?target=auth_code&mode=participant">
-                                    참가자 인증번호 전체 삭제
-                                </a></div></li>
-                        <li>
-                            <div class="button">
-                                <a href="/function/truncate.php?target=auth_code&mode=manager">
-                                    관리자 인증번호 전체 삭제
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <br>
                     <strong>&nbsp;&nbsp;사용자 관련</strong>
                     <ul>
                         <li>

@@ -1,9 +1,9 @@
 <?php
     class ProblemGrid{
-        private static function GenerateCell(int $stdid, string $title, int $score, string $solvers, int $idx, string $mode) : string{
+        private static function GenerateCell(string $nickname, string $title, int $score, string $solvers, int $idx, string $mode) : string{
             $cnt_solvers = substr_count($solvers, ',');
 
-            if(substr_count($solvers, (string)$stdid) == 1 || $mode == "view"){
+            if(substr_count($solvers, $nickname) == 1 || $mode == "view"){
                 return "
                     <div class=\"solved_cell\">
                         <strong class=\"prob_title\">$title</strong>
@@ -57,7 +57,7 @@
             }
         }
 
-        private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
+        private static function GetProblemCellsByCategory($conn, string $nickname, string $category, string $mode) : array{
             $cells = [];
             $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted, prob.category FROM problem AS prob LEFT JOIN logs ON prob.idx = logs.prob_idx)tmp WHERE setted=TRUE AND category = '$category'";
             $result = mysqli_query($conn, $sql);
@@ -68,7 +68,7 @@
                 $solvers = $row['solvers'];
                 $idx = $row['idx'];
 
-                $cell = self::GenerateCell($stdid, $title, $score, $solvers, $idx, $mode);
+                $cell = self::GenerateCell($nickname, $title, $score, $solvers, $idx, $mode);
                 array_push($cells, $cell);
             }
 
@@ -121,14 +121,14 @@
             ";
         }
 
-        public static function Print($conn, int $stdid, string $mode){
+        public static function Print($conn, string $nickname, string $mode){
             $sql = "SELECT category FROM problem GROUP BY category";
             $result = mysqli_query($conn, $sql);
             $subjects = [];
 
             while(($row = mysqli_fetch_assoc($result))){
                 $category = $row['category'];
-                $cells = self::GetProblemCellsByCategory($conn, $stdid, $category, $mode);
+                $cells = self::GetProblemCellsByCategory($conn, $nickname, $category, $mode);
 
                 if(count($cells) == 0){
                     continue;

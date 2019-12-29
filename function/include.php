@@ -40,7 +40,7 @@
     $num_rows = mysqli_num_rows($result);
     $result = mysqli_fetch_array($result);
 
-    $stdid = -1;
+    $name = null;
     $is_manager = false;
     $is_on_contest = ($num_rows == 0 || $result[0] == 0) ? false : true;
     $start_datetime = $result[1];
@@ -59,15 +59,15 @@
         $num_row = mysqli_affected_rows($conn);
 
         if($num_row == 1){
-            $sql = "SELECT stdid, is_manager FROM access_token WHERE token='$token' AND nickname='$nickname'";
+            $sql = "SELECT name, is_manager FROM access_token WHERE token='$token' AND nickname='$nickname'";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
-            $stdid = $result[0];
+            $name = $reuslt[0];
             $is_manager = $result[1];
             $signed = true;
         }
         else{
-            ShowAlert("15분간 활동이 없어 세션이 만료되었습니다. 다시 로그인해주세요.");
+            ShowAlertWithMove2Index("15분간 활동이 없어 세션이 만료되었습니다. 다시 로그인해주세요.");
             session_destroy();
         }
     }

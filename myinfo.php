@@ -29,8 +29,9 @@
                     <div class="row_wrap">
                         <h3>기본 정보</h3>
                         <?php
+                            
                             $nickname = htmlspecialchars($_SESSION['nickname']);
-                            echo "<p>학번: $stdid<br>";
+                            echo "<p>실명: $name<br>";
                             echo "닉네임: $nickname</p>";
                         ?>
                     </div>
