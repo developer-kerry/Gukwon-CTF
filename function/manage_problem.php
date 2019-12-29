@@ -121,19 +121,41 @@
         ShowAlertWithMove2Index("잘못된 접근입니다.");
     }
     else{
-        AddProblem(
-            $conn,
-            $_POST['prob_title'], 
-            $nickname, 
-            $_POST['prob_description'], 
-            $_POST['score'], 
-            $_POST['flag_type'], 
-            isset($_POST['input2flag']), 
-            $_POST['textInput'],
-            $_POST['category'],
-            $_POST['textCategory'],
-            $_POST['hint1'], 
-            $_POST['hint2']
-        );
+        if($_POST['mode'] == "add"){
+            AddProblem(
+                $conn,
+                $_POST['prob_title'], 
+                $nickname, 
+                $_POST['prob_description'], 
+                $_POST['score'], 
+                $_POST['flag_type'], 
+                isset($_POST['input2flag']), 
+                $_POST['textInput'],
+                $_POST['category'],
+                $_POST['textCategory'],
+                $_POST['hint1'], 
+                $_POST['hint2']
+            );
+        }
+        else if($_POST['mode'] == "modify"){
+            // 개발 필요
+        }
+        else if($_POST['mode'] == "delete"){
+            if(count($_POST['checkbox']) == 0){
+                ShowAlertWithHistoryBack("선택된 문제가 없습니다.");
+            }
+            else{
+                $idx = SecureStringProcess($conn, $_POST['checkbox'][0]);
+                $sql = "DELETE FROM problem WHERE idx = $idx";
+                    
+                for($i = 1; $i < count($_POST['checkbox']); $i++){
+                    $idx = SecureStringProcess($conn, $_POST['checkbox'][$i]);
+                    $sql .= " OR idx = $idx";
+                }
+            
+                mysqli_query($conn, $sql);
+                ShowAlertWithHistoryBack("삭제 성공!");
+            }
+        }
     }
 ?>

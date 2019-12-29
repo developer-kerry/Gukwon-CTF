@@ -73,6 +73,15 @@
                     <h3>문제 등록하기</h3>
                     <div class="problem_form">
                         <form action="/function/manage_problem.php" class="problem" method="POST">
+                            <?php
+                                if(isset($_GET['mode'])){
+                                    $mode = $_GET['mode'];
+                                    echo "<input type=\"hidden\" name=\"mode\" value=\"$mode\">";
+                                }
+                                else{
+                                    echo "<input type=\"hidden\" name=\"mode\" value=\"add\">";
+                                }
+                            ?>
                             <h4>문제 제목</h4>
                             <input type="text" name="prob_title" id="title" placeholder="&nbsp;문제 제목"><br>
                             <h4>문제 본문</h4>

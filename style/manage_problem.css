@@ -71,3 +71,8 @@ table .score{
     min-width:75px;
     text-align:center;
 }
+
+table .checkbox{
+    min-width:50px;
+    text-align:center;
+}

@@ -7,16 +7,19 @@
     }
     else{
         echo "
-            <table>
-                <thead>
-                    <tr>
-                        <th id=\"idx\">번호</th>
-                        <th id=\"title\">제목</th>
-                        <th id=\"category\">분류</th>
-                        <th id=\"score\">점수</th>
-                    </tr>
-                </thead>
-            <tbody>
+            <form action=\"/function/\">
+                <input type=\"hidden\" name=\"mode\" value=\"delete\">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id=\"idx\">번호</th>
+                            <th id=\"title\">제목</th>
+                            <th id=\"category\">분류</th>
+                            <th id=\"score\">점수</th>
+                            <th id=\"delete\">삭제</th>
+                        </tr>
+                    </thead>
+                <tbody>
         ";
 
         while(($row = mysqli_fetch_assoc($result))){
@@ -31,12 +34,16 @@
                     <td class=\"title\"><div class=\"button\">&nbsp;<a href=\"/solve_problem.php?idx=$idx\">$title</a></div></td>
                     <td class=\"category\">$category</td>
                     <td class=\"score\">$score"."점</td>
+                    <td class=\"delete\">
+                        <input type=\"checkbox\" name=\"checkbox\" class=\"checkbox\" value=\"$idx\">
+                    </td>
                 </tr>
             ";
         }
         echo "
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </form>
         ";
     }
  ?>
