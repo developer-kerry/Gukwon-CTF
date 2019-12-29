@@ -59,7 +59,7 @@
 
         private static function GetProblemCellsByCategory($conn, int $stdid, string $category, string $mode) : array{
             $cells = [];
-            $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted FROM problem AS prob LEFT JOIN logs ON prob.idx = logs.prob_idx)tmp WHERE setted=TRUE ";
+            $sql = "SELECT idx, title, score, solvers FROM (SELECT prob.idx, prob.title, prob.score, logs.solvers, prob.setted, prob.category FROM problem AS prob LEFT JOIN logs ON prob.idx = logs.prob_idx)tmp WHERE setted=TRUE AND category = '$category'";
             $result = mysqli_query($conn, $sql);
 
             while(($row = mysqli_fetch_assoc($result))){

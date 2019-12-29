@@ -10,10 +10,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th class=\"idx\">번호</th>
-                        <th class=\"title\">제목</th>
-                        <th class=\"category\">분류</th>
-                        <th class=\"score\">점수</th>
+                        <th id=\"idx\">번호</th>
+                        <th id=\"title\">제목</th>
+                        <th id=\"category\">분류</th>
+                        <th id=\"score\">점수</th>
                     </tr>
                 </thead>
             <tbody>

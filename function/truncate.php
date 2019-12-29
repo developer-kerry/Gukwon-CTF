@@ -64,6 +64,9 @@
                 mysqli_query($conn, $sql);
                 
                 $sql = "UPDATE logs SET solvers = '', viewers = ''";
+                mysqli_query($conn, $sql);
+
+                $sql = "UPDATE problem SET setted = 0";
                 break;
             default:
                 ShowAlertWithHistoryBack("잘못된 접근입니다.");

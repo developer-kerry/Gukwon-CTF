@@ -15,8 +15,8 @@
             ?>
         </style>
         <link rel="stylesheet" href="/style/master.css">
-        <link rel="stylesheet" href="/style/add_problem.css">
-        <title>문제 등록</title>
+        <link rel="stylesheet" href="/style/manage_problem.css">
+        <title>문제 관리</title>
     </head>
     <body>
         <script>
@@ -72,7 +72,7 @@
                 <div class="row_wrap">
                     <h3>문제 등록하기</h3>
                     <div class="problem_form">
-                        <form action="/function/add_problem.php" class="problem" method="POST">
+                        <form action="/function/manage_problem.php" class="problem" method="POST">
                             <h4>문제 제목</h4>
                             <input type="text" name="prob_title" id="title" placeholder="&nbsp;문제 제목"><br>
                             <h4>문제 본문</h4>
@@ -119,7 +119,7 @@
                 <div class="row_wrap">
                     <h3>등록된 문제 리스트</h3>
                     <?php
-                        include_once($_SERVER['DOCUMENT_ROOT']."/element/add_problem_table.php");
+                        include_once($_SERVER['DOCUMENT_ROOT']."/element/manage_problem_table.php");
                     ?>
                 </div>
             </div>
