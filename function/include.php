@@ -13,16 +13,16 @@
 
     function ShowAlertWithHistoryBack($msg){
         ShowAlert($msg);
-        echo "<script>history.back();</script>";
+        //echo "<script>history.back();</script>";
     }
 
     function ShowAlertWithMove2Index($msg){
         ShowAlert($msg);
-        echo "<script>location.href=\"/index.php\";</script>";
+        //echo "<script>location.href=\"/index.php\";</script>";
     }
 
     function MoveLocation($location){
-        echo "<script>location.href='$location';</script>";
+        //echo "<script>location.href='$location';</script>";
     }
 
     function GetDatetime(){
@@ -59,11 +59,12 @@
         $num_row = mysqli_affected_rows($conn);
 
         if($num_row == 1){
-            $sql = "SELECT name, is_manager FROM access_token WHERE token='$token' AND nickname='$nickname'";
+            $sql = "SELECT name, is_manager, is_superuser FROM access_token WHERE token='$token' AND nickname='$nickname'";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
 
-            $name = $reuslt[0];
+            $name = $result[0];
             $is_manager = $result[1];
+            $is_superuser = $result[2];
             $signed = true;
         }
         else{

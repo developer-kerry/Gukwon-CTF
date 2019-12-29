@@ -4,13 +4,13 @@
     $sql = "SELECT is_on_managersigning, is_on_participantsigning FROM contest_status";
     $result = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($result) != 0){
+    if(mysqli_num_rows($result) != 1){
         ShowAlertWithMove2Index("오류가 발생하였습니다.");
     }
     else{
-        $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_array($result);
 
-        if(!($row[0] || $row[1])){
+        if($row[0] && $row[1]){
             ShowAlertWithMove2Index("가입 가능 기간이 아닙니다.");
         }
         else{
@@ -40,9 +40,6 @@
                     $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
                     $name = SecureStringProcess($conn, $_POST['name']);
                     $is_manager = $row[0];
-        
-                    $sql = "DELETE FROM auth_code WHERE stdid=$stdid";
-                    mysqli_query($conn, $sql);
         
                     $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$name', '$nickname', 0, $is_manager, FALSE, NULL)";
                     mysqli_query($conn, $sql);

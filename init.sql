@@ -24,7 +24,8 @@ CREATE TABLE access_token(
     name VARCHAR(10) NOT NULL,
     nickname VARCHAR(16) NOT NULL,
     expire_datetime DATETIME NOT NULL,
-    is_manager BOOLEAN NOT NULL
+    is_manager BOOLEAN NOT NULL,
+    is_superuser BOOLEAN NOT NULL
 );
 
 
