@@ -6,10 +6,10 @@
 
     $sql = "SELECT viewers FROM logs WHERE prob_idx = $prob_idx";
     $viewers = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
-    $viewer_cnt = substr_count($viewers, "$stdid-$hint_type");
+    $viewer_cnt = substr_count($viewers, "$nickname-$hint_type/");
 
     if($viewer_cnt == 0){
-        $sql = "UPDATE logs SET viewers = CONCAT(viewers, '$nickname-$hint_type') WHERE prob_idx = $prob_idx";
+        $sql = "UPDATE logs SET viewers = CONCAT(viewers, '$nickname-$hint_type/') WHERE prob_idx = $prob_idx";
         mysqli_query($conn, $sql);
         ShowAlertWithHistoryBack("힌트가 열렸습니다!");
     }

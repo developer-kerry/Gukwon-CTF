@@ -1,9 +1,9 @@
 <?php
     class ProblemGrid{
         private static function GenerateCell(string $nickname, string $title, int $score, string $solvers, int $idx, string $mode) : string{
-            $cnt_solvers = substr_count($solvers, ',');
+            $cnt_solvers = substr_count($solvers, '/');
 
-            if(substr_count($solvers, $nickname) == 1 || $mode == "view"){
+            if(substr_count($solvers, "$nickname/") == 1 || $mode == "view"){
                 return "
                     <div class=\"solved_cell\">
                         <strong class=\"prob_title\">$title</strong>

@@ -19,7 +19,7 @@
                 </form>
             ";
 
-            $sql = "UPDATE problem SET description = '$description' WHERE idx=$prob_idx";
+            $sql = "UPDATE problem SET description = '$description' WHERE idx = $prob_idx";
             mysqli_query($conn, $sql);
 
             $sql = "INSERT INTO answer_flag VALUES($prob_idx, '$answer')";
