@@ -38,7 +38,8 @@ CREATE TABLE problem(
     score INT NOT NULL,
     flag TEXT NOT NULL,
     category TEXT NOT NULL,
-    setted BOOLEAN NOT NULL
+    setted BOOLEAN NOT NULL,
+    attached TEXT NOT NULL
 );
 
 CREATE TABLE logs(

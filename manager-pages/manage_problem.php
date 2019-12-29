@@ -121,6 +121,8 @@
                             <input type="text" name="textInput" id="textInput" style="display:none;"><br>
                             <input type="text" name="hint1" id="hint1" placeholder="첫 번째 힌트"><br>
                             <input type="text" name="hint2" id="hint2" placeholder="두 번째 힌트"><br>
+                            <br>
+                            <input type="file" name="attach" id="file"> 첨부파일 업로드
                             <input type="submit" id="submit" value="문제 등록">
                         </form>
                     </div>
