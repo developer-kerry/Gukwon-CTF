@@ -12,6 +12,9 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
             ?>
+            button{
+                margin-bottom:5px;
+            }
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <title>대회 진행상황 관리</title>
@@ -35,21 +38,21 @@
                                 if($row[0]){
                                     echo "
                                         <strong>현재 관리자 회원가입 기간입니다.</strong><br><br>
-                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_participant';\">참가자 회원가입 기간으로</button>
+                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_participant';\">참가자 회원가입 기간으로</button><br>
                                         <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=stop';\">회원가입 중단</button>
                                     ";
                                 }
                                 else if($row[1]){
                                     echo "
                                         <strong>현재 참가자 회원가입 기간입니다.</strong><br><br>
-                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_manager';\">관리자 회원가입 기간으로</button>
+                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_manager';\">관리자 회원가입 기간으로</button><br>
                                         <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=stop';\">회원가입 중단</button>
                                     ";
                                 }
                                 else{
                                     echo "
                                         <strong>현재 회원가입 중단 기간입니다.</strong><br><br>
-                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_manager';\">관리자 회원가입 기간으로</button>
+                                        <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_manager';\">관리자 회원가입 기간으로</button><br>
                                         <button onclick=\"location.href='/function/manage_contest.php?target=signin&handle=start_participant';\">참가자 회원가입 기간으로</button>
                                     ";
                                 }
