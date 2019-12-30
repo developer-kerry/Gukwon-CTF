@@ -120,7 +120,7 @@
                                     <strong>작성자: $author</strong><br>
                                     <strong>작성시: $uploaded</strong><br>
                                     <strong>배점: $score"."점</strong>
-                            ".(($is_manager) ? "<br><strong>flag={".$row['flag']."}</strong>" : "")."<br><br>";
+                            ".(($is_manager) ? "<br><strong>".$row['flag']."</strong>" : "")."<br><br>";
 
                             if($is_hint1_opened || $is_manager){
                                 echo "<div id=\"hint1\"><strong>첫 번째 힌트: $hint1</strong></div>";

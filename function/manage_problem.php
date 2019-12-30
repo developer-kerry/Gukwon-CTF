@@ -14,7 +14,7 @@
                 <br><br><br><br><br>
                 <form action=\"/function/\" method=\"POST\">
                     <input type=\"text\" name=\"answer\" id=\"answer\" placeholder=\"&nbsp;정답 입력\">
-                    <input type=\"hidden\" name=\"prob_title\" value=\"$title\">
+                    <input type=\"hidden\" name=\"prob_idx\" value=\"$prob_idx\">
                     <input type=\"submit\" id=\"submit\" value=\"제출\">
                 </form>
             ";
@@ -71,7 +71,7 @@
         }
 
         if($flag_type == "auto"){
-            $flag = md5((string)rand().GetDatetime().(string)rand());
+            $flag = "flag{".md5((string)rand().GetDatetime().(string)rand())."}";
             
             if($checkedValue == "true" && strlen($textInput) > 0){
                 $answer = SecureStringProcess($conn, $textInput);
@@ -82,11 +82,11 @@
             }
         }
         else{
-            if(strlen($textInput) > 8){
-                $flag = SecureStringProcess($conn, $textInput);
+            if(strlen($textInput) > 5){
+                $flag = "flag{".SecureStringProcess($conn, $textInput)."}";
             }
             else{
-                ShowAlertWithHistoryBack("Flag는 9자 이상이어야 합니다.");
+                ShowAlertWithHistoryBack("Flag는 6자 이상이어야 합니다.");
                 return;
             }
         }

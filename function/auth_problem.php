@@ -3,7 +3,8 @@
         ShowAlertWithHistoryBack("뭐하는 거죠? ^^...");
     }
     else{
-        $flag = SecureStringProcess($conn, $_POST['flag']);
+        $flag = SecureStringProcess($conn, $flag);
+
         $sql = "SELECT prob.idx, prob.score, prob.setted, logs.solvers, logs.viewers FROM problem as prob LEFT JOIN logs ON idx = prob_idx WHERE flag = '$flag'";
         $result = mysqli_query($conn, $sql);
 
