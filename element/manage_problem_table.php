@@ -7,7 +7,7 @@
     }
     else{
         echo "
-            <form action=\"/function/\">
+            <form action=\"/function/manage_problem.php\" method=\"POST\">
                 <input type=\"hidden\" name=\"mode\" value=\"delete\">
                 <table>
                     <thead>
@@ -43,6 +43,8 @@
         echo "
                     </tbody>
                 </table>
+                <br>
+                <input type=\"submit\" id=\"submit\" value=\"삭제\">
             </form>
         ";
     }

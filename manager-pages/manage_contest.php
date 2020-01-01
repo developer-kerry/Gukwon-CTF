@@ -71,7 +71,7 @@
                                 }
                                 else{
                                     echo "
-                                        <strong>현재 대회 진행중이 아닙니다.</strong>&nbsp;->&nbsp;
+                                        <strong>현재 대회 진행중이 아닙니다.<br>대회 시작 시, 회원가입 기능이 중단됩니다.</strong>&nbsp;->&nbsp;
                                         <button onclick=\"location.href='/function/manage_contest.php?target=contest&handle=start';\">대회 시작</button>
                                     ";
                                 }

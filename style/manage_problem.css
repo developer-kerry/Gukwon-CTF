@@ -2,7 +2,7 @@
     margin-left:15px;
 }
 
-.problem input, .problem textarea, .problem input, .problem .combobox{
+.problem input, .problem textarea, .problem input, .problem .combobox, .problem #attach{
     margin-left:25px;
 }
 
@@ -12,6 +12,8 @@
 
 #submit{
     margin-top:3px;
+    width:100px;
+    height:30px;
 }
 
 #textInput{
@@ -75,4 +77,13 @@ table .score{
 table .checkbox{
     min-width:50px;
     text-align:center;
+}
+
+#submit{
+    float:right;
+}
+
+#attach{
+    margin:0;
+    padding:0;
 }

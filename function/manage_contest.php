@@ -27,12 +27,15 @@
                 }
                 break;
             case "contest":
-                if($_GET['handle'] == "stop" && $is_on_contest){    
+                if($_GET['handle'] == "stop"){    
                     $sql = "UPDATE contest_status SET is_on_contest = FALSE";
                     $message = "대회가 종료되었습니다.\\n종료 시각: $datetime";
                 }
-                else if($_GET['handle'] == "start" && !$is_on_contest){
-                    $sql = "UPDATE contest_status SET is_on_contest = TRUE, start_datetime = $datetime";
+                else if($_GET['handle'] == "start"){
+                    $sql = "UPDATE contest_status SET is_on_managersigning = FALSE, is_on_participantsigning = FALSE";
+                    mysqli_query($conn, $sql);
+
+                    $sql = "UPDATE contest_status SET is_on_contest = TRUE, start_datetime = '$datetime'";
                     $message = "대회가 시작되었습니다!\\n시작 시각: $datetime";
                 }
                 else{

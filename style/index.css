@@ -17,7 +17,6 @@ table thead th{
 
 table .title{
     min-width:250px;
-    margin-left:5px;
 }
 
 table .upload_datetime{
@@ -26,6 +25,10 @@ table .upload_datetime{
 
 table tbody tr td{
     border-bottom:1px solid #C6C6C6;
+}
+
+table tbody tr .title a{
+    margin-left:5px;
 }
 
 table tbody a{

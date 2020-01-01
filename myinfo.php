@@ -31,13 +31,17 @@
                         <?php
                             
                             $nickname = htmlspecialchars($_SESSION['nickname']);
-                            echo "<p>실명: $name<br>";
-                            echo "닉네임: $nickname<br>";
-                            echo "학번: $stdid</p>";
+                            echo "
+                                <p>실명: $name<br>
+                                닉네임: $nickname<br>
+                                학번: $stdid</p>
+                            ";
                         ?>
                     </div>
                     <?php
-                        echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/manager_menu.html"); 
+                        if($is_manager){
+                            echo file_get_contents($_SERVER['DOCUMENT_ROOT']."/template/manager_menu.html"); 
+                        }
                     ?>
                 </div>
             </div>

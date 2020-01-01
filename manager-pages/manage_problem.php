@@ -110,7 +110,7 @@
                                     ?>
                                 </select>
                             </span>
-                            <input type="text" name="textCategory" id="textCategory" placeholder="문제 분류 입력">
+                            <input type="text" name="textCategory" id="textCategory" placeholder="&nbsp;문제 분류 입력">
                             <br>
                             <br>
                             <input type="radio" name="flag_type" id="rdoAuto" class="radio" value="auto" onload="changeHandler();" onchange="changeHandler();" checked> Flag 자동 설정
@@ -119,10 +119,13 @@
                                 <input type="checkbox" name="input2flag" id="chkInput2flag" value="true" onload="changeHandler();" onchange="changeHandler();"> 문제 페이지 내 입력창에 정답 입력 시 Flag 반환<br>
                             </span>
                             <input type="text" name="textInput" id="textInput" style="display:none;"><br>
-                            <input type="text" name="hint1" id="hint1" placeholder="첫 번째 힌트"><br>
-                            <input type="text" name="hint2" id="hint2" placeholder="두 번째 힌트"><br>
+                            <input type="text" name="hint1" id="hint1" placeholder="&nbsp;첫 번째 힌트"><br>
+                            <input type="text" name="hint2" id="hint2" placeholder="&nbsp;두 번째 힌트"><br>
                             <br>
-                            <input type="file" name="attach" id="file"> 첨부파일 업로드
+                            <h4>첨부파일 업로드</h4> 
+                            <input type="file" name="attach" id="attach"></span><br>
+                            <br>
+                            <br>
                             <input type="submit" id="submit" value="문제 등록">
                         </form>
                     </div>

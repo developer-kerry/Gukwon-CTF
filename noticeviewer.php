@@ -15,7 +15,7 @@
         </style>
         <link rel="stylesheet" href="/style/master.css">
         <link rel="stylesheet" href="/style/noticeviewer.css">
-        <title>공지 열람중</title>
+        <title>공지 열람</title>
     </head>
     <body>
         <div class="top_nav">

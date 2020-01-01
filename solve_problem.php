@@ -67,6 +67,7 @@
                                         prob.upload_datetime as up,
                                         prob.score,
                                         prob.description,
+                                        prob.attached_fname as fname,
                                         tmp.hint1,
                                         tmp.hint2,
                                         tmp.viewers
@@ -88,7 +89,6 @@
                         }
                         
                         $result = mysqli_query($conn, $sql);
-                        echo mysqli_error($conn);
 
                         if(mysqli_num_rows($result) == 0){
                             ShowAlertWithHistoryBack("잘못된 접근입니다.");
@@ -123,7 +123,7 @@
                                     <strong>작성자: $author</strong><br>
                                     <strong>작성시: $uploaded</strong><br>
                                     <strong>배점: $score"."점</strong>
-                            ".(($is_manager) ? "<br><strong>".$row['flag']."</strong>" : "")."<br><br><br><br><br>";
+                            ".(($is_manager) ? "<br><strong>".strtolower($row['flag'])."</strong>" : "")."<br><br>";
 
                             if($fname != null){
                                 if(file_exists($_SERVER['DOCUMENT_ROOT']."/files/$fname")){
@@ -138,8 +138,14 @@
                                 
                             }
 
+                            echo "
+                                </div>
+                                <div id=\"description\">$description<strong>
+                            ";
+
+                                
                             if($is_hint1_opened || $is_manager){
-                                echo "<div id=\"hint1\"><strong>첫 번째 힌트: $hint1</strong></div>";
+                                echo "<div id=\"hint1\">첫 번째 힌트: $hint1</div>";
                             }
                             else{
                                 echo "
@@ -152,7 +158,7 @@
                             }
 
                             if($is_hint2_opened || $is_manager){
-                                echo "<div id=\"hint2\"><strong>두 번째 힌트: $hint2</strong></div>";
+                                echo "<div id=\"hint2\">두 번째 힌트: $hint2</div>";
                             }
                             else{
                                 echo "
@@ -164,9 +170,7 @@
                                 ";
                             }
 
-                            echo "
-                                </div>
-                                <p id=\"description\">$description</p>";
+                            echo "</strong></div>";
                         }
                     ?>
                 </div>

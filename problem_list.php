@@ -2,7 +2,7 @@
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
     include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
 
-    if(!$is_on_contest){
+    if(!$is_on_contest && !$is_manager){
         ShowAlertWithMove2Index("대회 진행중이 아닙니다.");
     }
 ?>

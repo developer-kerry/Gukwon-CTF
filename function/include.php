@@ -68,7 +68,7 @@
             $signed = true;
         }
         else{
-            ShowAlertWithMove2Index("15분간 활동이 없어 세션이 만료되었습니다. 다시 로그인해주세요.");
+            ShowAlertWithMoveLocation("15분간 활동이 없어 세션이 만료되었습니다. 다시 로그인해주세요.", "/login.php");
             session_destroy();
         }
     }

@@ -33,7 +33,7 @@
         if($answer != null){
             $description .= "
                 <br><br><br><br><br>
-                <form action=\"/function/\" method=\"POST\">
+                <form action=\"/function/answer2flag.php\" method=\"POST\">
                     <input type=\"text\" name=\"answer\" id=\"answer\" placeholder=\"&nbsp;정답 입력\">
                     <input type=\"hidden\" name=\"prob_idx\" value=\"$prob_idx\">
                     <input type=\"submit\" id=\"submit\" value=\"제출\">
@@ -66,7 +66,7 @@
         $sql = "INSERT INTO logs VALUES($prob_idx, '', '')";
         mysqli_query($conn, $sql);
 
-        ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
+        ShowAlertWithHistoryBack("문제 등록 완료!");
     }
 
     function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $textCategory, $hint1Value, $hint2Value, $file){
@@ -136,7 +136,7 @@
         }
 
         $flag = strtoupper($flag);
-        $answer = strtoupper($flag);
+        $answer = strtoupper($answer);
 
         AddProblem_Process($conn, $file, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
@@ -163,20 +163,40 @@
             );
         }
         else if($_POST['mode'] == "delete"){
-            // 파일도 같이 삭제
             if(count($_POST['checkbox']) == 0){
                 ShowAlertWithHistoryBack("선택된 문제가 없습니다.");
             }
             else{
                 $idx = SecureStringProcess($conn, $_POST['checkbox'][0]);
-                $sql = "DELETE FROM problem WHERE idx = $idx";
+                $sql_select = "SELECT attached_fname AS fname FROM problem WHERE idx = $idx";
+                $sql_delete = "DELETE prob, hint, logs, ans2flag FROM problem AS prob LEFT JOIN hint ON hint.prob_idx = prob.idx LEFT JOIN logs ON logs.prob_idx = prob.idx LEFT JOIN answer_flag AS ans2flag ON ans2flag.prob_idx = prob.idx WHERE prob.idx = $idx";
                     
                 for($i = 1; $i < count($_POST['checkbox']); $i++){
                     $idx = SecureStringProcess($conn, $_POST['checkbox'][$i]);
-                    $sql .= " OR idx = $idx";
+                    $sql_select .= " OR idx = $idx";
+                    $sql_delete .= " OR prob.idx = $idx";
                 }
             
-                mysqli_query($conn, $sql);
+                $result = mysqli_query($conn, $sql_select);
+                $fnames_to_delete = [];
+
+                $del_fname = mysqli_fetch_assoc($result)['fname'];
+                $sql_delete_from_uploaded = "DELETE FROM upload_file WHERE des_name = '$del_fname'";
+                array_push($fnames_to_delete, $del_fname);
+
+                while(($row = mysqli_fetch_assoc($result))){
+                    $del_fname = $row['fname'];
+                    array_push($fnames_to_delete, $del_fname);
+                    $sql_delete_from_uploaded .= " OR des_name = '$del_fname'";
+                }
+
+                mysqli_query($conn, $sql_delete_from_prob);
+                mysqli_query($conn, $sql_delete_from_uploaded);
+
+                for($i = 0; $i < count($fnames_to_delete); $i++){
+                    unlink($_SERVER['DOCUMENT_ROOT']."/files/".$fnames_to_delete[$i]);
+                }
+
                 ShowAlertWithHistoryBack("삭제 성공!");
             }
         }

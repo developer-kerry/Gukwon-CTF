@@ -22,15 +22,15 @@ table tbody tr td{
     min-width:200px;
 }
 
-#rank{
-    margin-left:30px;
-}
-
 table tr .rank{
     text-align:center;
 }
 
 table tr .score{
+    text-align:center;
+}
+
+table tr .last_auth{
     text-align:center;
 }
 
