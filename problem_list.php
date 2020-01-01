@@ -1,11 +1,10 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT']."/function/include.php");
     include($_SERVER['DOCUMENT_ROOT']."/function/problem_list.php");
-    /* On Production
+
     if(!$is_on_contest){
         ShowAlertWithMove2Index("대회 진행중이 아닙니다.");
     }
-    */
 ?>
 <html>
     <head>

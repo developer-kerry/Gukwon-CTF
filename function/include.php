@@ -46,9 +46,8 @@
     $start_datetime = $result[1];
     $signed = false;
 
-    // On Production
-    //$sql = "DELETE FROM access_token WHERE TIMESTAMPDIFF(minute, expire_datetime, NOW()) > 15";
-    //mysqli_query($conn, $sql);
+    $sql = "DELETE FROM access_token WHERE TIMESTAMPDIFF(minute, expire_datetime, NOW()) > 15";
+    mysqli_query($conn, $sql);
 
     if(isset($_SESSION['token']) && isset($_SESSION['nickname'])){
         $token = mysqli_real_escape_string($conn, $_SESSION['token']);

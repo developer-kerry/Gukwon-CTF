@@ -1,5 +1,7 @@
 <?php
-    if(!$signed){
+    include("include.php");
+
+    if(!$signed || !$is_on_contest){
         ShowAlertWithHistoryBack("뭐하는 거죠? ^^...");
     }
     else{

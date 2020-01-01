@@ -8,7 +8,7 @@
             <?php
                 include($_SERVER['DOCUMENT_ROOT']."/template/dynamic_css.php");
 
-                if(!isset($_GET['idx'])){
+                if(!isset($_GET['idx']) || (!$is_manager && !$is_on_contest)){
                     ShowAlertWithHistoryBack("잘못된 접근입니다.");
                 }
             ?>
