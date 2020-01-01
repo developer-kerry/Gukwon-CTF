@@ -56,7 +56,8 @@
                                         LEFT JOIN logs 
                                         ON hint.prob_idx = logs.prob_idx
                                     ) AS tmp
-                                    ON prob.idx = tmp.prob_idx
+				    ON prob.idx = tmp.prob_idx
+                                    WHERE idx = $idx
                             ";
                         }
                         else{
@@ -84,7 +85,8 @@
                                         LEFT JOIN logs 
                                         ON hint.prob_idx = logs.prob_idx
                                     ) AS tmp
-                                    ON prob.idx = tmp.prob_idx
+				    ON prob.idx = tmp.prob_idx
+                                    WHERE idx = $idx
                             ";
                         }
                         
@@ -124,7 +126,7 @@
                                     <strong>작성시: $uploaded</strong><br>
                                     <strong>배점: $score"."점</strong>
                             ".(($is_manager) ? "<br><strong>".strtolower($row['flag'])."</strong>" : "")."<br><br>";
-
+                        
                             if($fname != null){
                                 if(file_exists($_SERVER['DOCUMENT_ROOT']."/files/$fname")){
                                     echo "
@@ -144,12 +146,12 @@
                             ";
 
                                 
-                            if($is_hint1_opened || $is_manager){
+                            if(($is_hint1_opened || $is_manager) && $hint1 != ""){
                                 echo "<div id=\"hint1\">첫 번째 힌트: $hint1</div>";
                             }
-                            else{
+                            else if($hint1 != ""){
                                 echo "
-                                    <form action=\"/function/view_hint.php\" method=\"POST\">
+                                    <form action=\"/function/view_hint.php\" id=\"hint1\" method=\"POST\">
                                         <input type=\"hidden\" name=\"prob_idx\" value=\"$idx\">
                                         <input type=\"hidden\" name=\"hint_type\" value=\"hint1\">
                                         <input type=\"submit\" value=\"힌트1 보기\">
@@ -157,12 +159,12 @@
                                 ";
                             }
 
-                            if($is_hint2_opened || $is_manager){
+                            if(($is_hint2_opened || $is_manager) && $hint2 != ""){
                                 echo "<div id=\"hint2\">두 번째 힌트: $hint2</div>";
                             }
-                            else{
+                            else if($hint2 != ""){
                                 echo "
-                                    <form action=\"/function/view_hint.php\" method=\"POST\">
+                                    <form action=\"/function/view_hint.php\" id=\"hint2\" method=\"POST\">
                                         <input type=\"hidden\" name=\"prob_idx\" value=\"$idx\">
                                         <input type=\"hidden\" name=\"hint_type\" value=\"hint2\">
                                         <input type=\"submit\" value=\"힌트2 보기\">

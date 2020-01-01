@@ -54,9 +54,11 @@
         $nickname = mysqli_real_escape_string($conn, $_SESSION['nickname']);
 
         $sql = "UPDATE access_token SET expire_datetime=NOW() WHERE token='$token' AND nickname='$nickname'";
-        mysqli_query($conn, $sql);
-        $num_row = mysqli_affected_rows($conn);
+	mysqli_query($conn, $sql);
 
+	$sql = "SELECT COUNT(*) FROM access_token WHERE token='$token' AND nickname='$nickname'";
+        $num_row = mysqli_fetch_array(mysqli_query($conn, $sql))[0];
+        
         if($num_row == 1){
             $sql = "SELECT name, stdid, is_manager, is_superuser FROM access_token WHERE token='$token' AND nickname='$nickname'";
             $result = mysqli_fetch_array(mysqli_query($conn, $sql));
@@ -67,7 +69,7 @@
             $is_superuser = $result[3];
             $signed = true;
         }
-        else{
+	else{
             ShowAlertWithMoveLocation("15분간 활동이 없어 세션이 만료되었습니다. 다시 로그인해주세요.", "/login.php");
             session_destroy();
         }

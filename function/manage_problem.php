@@ -10,10 +10,10 @@
             $des_fname = md5(microtime());
             $des_path = $_SERVER['DOCUMENT_ROOT']."/files/$des_fname";
             
-            if(move_uploaded_file($file['tmp_name'], $des_path)){
+	    if(move_uploaded_file($file['tmp_name'], $des_path)){
                 $sql = "INSERT INTO upload_file VALUES('$src_fname', '$des_fname')";
-                mysqli_query($conn, $sql);
-            }
+	        mysqli_query($conn, $sql);
+	    }
         }
 
         if($des_fname == null){
@@ -167,7 +167,7 @@
                 ShowAlertWithHistoryBack("선택된 문제가 없습니다.");
             }
             else{
-                $idx = SecureStringProcess($conn, $_POST['checkbox'][0]);
+		$idx = SecureStringProcess($conn, (gettype($_POST['checkbox']) == 'string') ? $_POST['checkbox'] : $_POST['checkbox'][0]);
                 $sql_select = "SELECT attached_fname AS fname FROM problem WHERE idx = $idx";
                 $sql_delete = "DELETE prob, hint, logs, ans2flag FROM problem AS prob LEFT JOIN hint ON hint.prob_idx = prob.idx LEFT JOIN logs ON logs.prob_idx = prob.idx LEFT JOIN answer_flag AS ans2flag ON ans2flag.prob_idx = prob.idx WHERE prob.idx = $idx";
                     
@@ -189,8 +189,8 @@
                     array_push($fnames_to_delete, $del_fname);
                     $sql_delete_from_uploaded .= " OR des_name = '$del_fname'";
                 }
-
-                mysqli_query($conn, $sql_delete_from_prob);
+		echo $sql_delete;
+		mysqli_query($conn, $sql_delete);
                 mysqli_query($conn, $sql_delete_from_uploaded);
 
                 for($i = 0; $i < count($fnames_to_delete); $i++){

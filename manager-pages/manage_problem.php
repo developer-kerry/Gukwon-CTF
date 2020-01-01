@@ -19,7 +19,7 @@
         <title>문제 관리</title>
     </head>
     <body>
-        <script>
+    <script>
             function comboboxChangeHandler(){
                 var combobox = document.getElementById("category");
                 var textCategory = document.getElementById("textCategory");
@@ -137,6 +137,11 @@
                     ?>
                 </div>
             </div>
-        </div>
+	</div>
+    <script>
+        if(document.getElementById("title").value != ""){
+	    location.reload();
+	}
+    </script>
     </body>
 </html>
