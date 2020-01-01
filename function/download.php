@@ -14,8 +14,8 @@
     header("Content-Disposition: attachment; filename=".iconv("utf-8", "euc-kr", $src_fname));
     header("Content-Transfer-Encoding: binary");
 
-    $fh = fopen($fullpath, "r");
-    fpassthru($fh);
+    $file_stream = fopen($fullpath, "r");
+    fpassthru($file_stream);
 
     exit;
 ?>
