@@ -1,9 +1,30 @@
 <?php
     include("include.php");
 
-    function AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
-        $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, category, setted)
-                VALUES('$title', '$author', NOW(), '$description', $score, '$flag', '$category', FALSE)";
+    function AddProblem_Process($conn, $file, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2){
+        $sql = "";
+        $des_fname = null;
+
+        if(isset($file) && $file['name'] != ""){
+            $src_fname = $file['name'];
+            $des_fname = md5(microtime());
+            $des_path = $_SERVER['DOCUMENT_ROOT']."/files/$des_fname";
+            
+            if(move_uploaded_file($file['tmp_name'], $des_path)){
+                $sql = "INSERT INTO upload_file VALUES('$src_fname', '$des_fname')";
+                mysqli_query($conn, $sql);
+            }
+        }
+
+        if($des_fname == null){
+            $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, category, setted)
+            VALUES('$title', '$author', NOW(), '$description', $score, '$flag', '$category', FALSE)";
+        }
+        else{
+            $sql = "INSERT INTO problem(title, author, upload_datetime, description, score, flag, category, setted, attached_fname)
+            VALUES('$title', '$author', NOW(), '$description', $score, '$flag', '$category', FALSE, '$des_fname')";
+        }
+       
         mysqli_query($conn, $sql);
 
         $sql = "SELECT idx FROM problem ORDER BY idx DESC LIMIT 1";
@@ -48,7 +69,7 @@
         ShowAlertWithMoveLocation("문제 등록 완료!", "/manager-pages/add_problem.php");
     }
 
-    function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $textCategory, $hint1Value, $hint2Value){
+    function AddProblem($conn, $title, $author, $description, $score, $flag_type, $checkedValue, $textInput, $categoryValue, $textCategory, $hint1Value, $hint2Value, $file){
         $title = SecureStringProcess($conn, $title);
         $description = SecureStringProcess($conn, $description);
         $flag = null;
@@ -117,7 +138,7 @@
         $flag = strtoupper($flag);
         $answer = strtoupper($flag);
 
-        AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
+        AddProblem_Process($conn, $file, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
 
     if(!$is_manager){
@@ -137,13 +158,12 @@
                 $_POST['category'],
                 $_POST['textCategory'],
                 $_POST['hint1'], 
-                $_POST['hint2']
+                $_POST['hint2'],
+                $_FILES['attach']
             );
         }
-        else if($_POST['mode'] == "modify"){
-            // 개발 필요
-        }
         else if($_POST['mode'] == "delete"){
+            // 파일도 같이 삭제
             if(count($_POST['checkbox']) == 0){
                 ShowAlertWithHistoryBack("선택된 문제가 없습니다.");
             }

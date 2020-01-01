@@ -31,9 +31,8 @@ CREATE TABLE access_token(
 );
 
 CREATE TABLE upload_file(
-    idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    orig_name TEXT NOT NULL,
-    name_save TEXT NOT NULL
+    src_name TEXT NOT NULL,
+    des_name VARCHAR(32) PRIMARY KEY NOT NULL
 );
 
 
@@ -47,7 +46,7 @@ CREATE TABLE problem(
     flag TEXT NOT NULL,
     category TEXT NOT NULL,
     setted BOOLEAN NOT NULL,
-    attached TEXT NOT NULL
+    attached_fname VARCHAR(32)
 );
 
 CREATE TABLE logs(

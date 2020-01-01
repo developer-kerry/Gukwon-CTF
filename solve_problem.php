@@ -39,6 +39,7 @@
                                         prob.score,
                                         prob.description,
                                         prob.flag,
+                                        prob.attached_fname as fname,
                                         tmp.hint1,
                                         tmp.hint2,
                                         tmp.viewers
@@ -101,6 +102,8 @@
                             $score = $row['score'];
                             $description = $row['description'];
 
+                            $fname = $row['fname'];
+
                             $hint1 = $row['hint1'];
                             $hint2 = $row['hint2'];
 
@@ -120,7 +123,20 @@
                                     <strong>작성자: $author</strong><br>
                                     <strong>작성시: $uploaded</strong><br>
                                     <strong>배점: $score"."점</strong>
-                            ".(($is_manager) ? "<br><strong>".$row['flag']."</strong>" : "")."<br><br>";
+                            ".(($is_manager) ? "<br><strong>".$row['flag']."</strong>" : "")."<br><br><br><br><br>";
+
+                            if($fname != null){
+                                if(file_exists($_SERVER['DOCUMENT_ROOT']."/files/$fname")){
+                                    echo "
+                                        첨부파일이 있습니다:&nbsp;
+                                        <button onclick=\"location.href='/function/download.php?fname=$fname';\">파일 다운로드</button>
+                                    ";
+                                }
+                                else{
+                                    echo "첨부파일이 있었으나 삭제되었습니다. 운영진에 문의 바랍니다.";
+                                }
+                                
+                            }
 
                             if($is_hint1_opened || $is_manager){
                                 echo "<div id=\"hint1\"><strong>첫 번째 힌트: $hint1</strong></div>";

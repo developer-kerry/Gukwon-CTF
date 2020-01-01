@@ -72,7 +72,7 @@
                 <div class="row_wrap">
                     <h3>문제 등록하기</h3>
                     <div class="problem_form">
-                        <form action="/function/manage_problem.php" class="problem" method="POST">
+                        <form action="/function/manage_problem.php" class="problem" method="POST" enctype="multipart/form-data">
                             <?php
                                 if(isset($_GET['mode'])){
                                     $mode = $_GET['mode'];
