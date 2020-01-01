@@ -114,6 +114,9 @@
             return;
         }
 
+        $flag = strtoupper($flag);
+        $answer = strtoupper($flag);
+
         AddProblem_Process($conn, $title, $author, $description, $score, $flag, $answer, $category, $hint1, $hint2);
     }
 

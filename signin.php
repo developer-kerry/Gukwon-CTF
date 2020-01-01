@@ -41,6 +41,7 @@
                         <br>
                         <input type="text" name="nickname" placeholder="닉네임"><br>
                         <input type="text" name="name" placeholder="실명"><br>
+                        <input type="number" name="stdid" placeholder="학번"><br>
                         <input type="submit" value="등록">
                     </form>
                 </div>

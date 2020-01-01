@@ -6,6 +6,7 @@ CREATE TABLE user_info(
     pwd_hash TEXT NOT NULL,
     name VARCHAR(10) NOT NULL,
     nickname VARCHAR(16) NOT NULL PRIMARY KEY,
+    stdid INT NOT NULL,
     score TEXT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
@@ -23,9 +24,16 @@ CREATE TABLE access_token(
     token TEXT NOT NULL,
     name VARCHAR(10) NOT NULL,
     nickname VARCHAR(16) NOT NULL,
+    stdid INT NOT NULL,
     expire_datetime DATETIME NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL
+);
+
+CREATE TABLE upload_file(
+    idx INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    orig_name TEXT NOT NULL,
+    name_save TEXT NOT NULL
 );
 
 

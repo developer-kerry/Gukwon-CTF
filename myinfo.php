@@ -32,7 +32,8 @@
                             
                             $nickname = htmlspecialchars($_SESSION['nickname']);
                             echo "<p>실명: $name<br>";
-                            echo "닉네임: $nickname</p>";
+                            echo "닉네임: $nickname<br>";
+                            echo "학번: $stdid</p>";
                         ?>
                     </div>
                     <?php

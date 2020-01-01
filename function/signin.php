@@ -36,12 +36,16 @@
                 else if($pwd != $pwd_chk){
                     ShowAlertWithHistoryBack('비밀번호를 다시 확인해주세요.');
                 }
+                else if(!isset($_POST['stdid'])){
+                    ShowAlertWithHistoryBack('학번을 입력해주세요.');
+                }
                 else{
                     $pwd_hash = password_hash($pwd, PASSWORD_DEFAULT);
                     $name = SecureStringProcess($conn, $_POST['name']);
+                    $stdid = SecureStringProcess($conn, $_POST['stdid']);
                     $is_manager = $row[0];
         
-                    $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$name', '$nickname', 0, $is_manager, FALSE, NULL)";
+                    $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$name', '$nickname', $stdid, 0, $is_manager, FALSE, NULL)";
                     mysqli_query($conn, $sql);
         
                     ShowAlert("가입 성공!");

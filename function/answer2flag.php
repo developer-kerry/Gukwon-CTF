@@ -9,7 +9,7 @@
         if(mysqli_num_rows($result) == 0){
             $row = mysqli_fetch_assoc($result);
 
-            if($row['answer'] == $_POST['answer']){
+            if($row['answer'] == strtoupper($_POST['answer'])){
                 $flag = $row['flag'];
                 echo "
                     $flag<br>
