@@ -16,10 +16,11 @@
                 for($i = 1; $i < count($_POST['checkbox_set']); $i++){
                     $idx = SecureStringProcess($conn, $_POST['checkbox_set'][$i]);
                     $sql .= " OR idx = $idx";
-                }
+		    echo $sql;
+		}
         
                 mysqli_query($conn, $sql);
-                ShowAlertWithHistoryBack("처리 성공!");
+                //ShowAlertWithHistoryBack("처리 성공!");
             }
         }
         else if($_POST['mode'] == "unset"){

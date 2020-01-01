@@ -33,7 +33,7 @@
                         <td class=\"title\"><div class=\"button\"><a href=\"/solve_problem.php?idx=$idx\">$title</a></div></td>
                         <td class=\"category\">$category</td>
                         <td class=\"score\">$score"."점</td>
-                        <td class=\"set\"><input type=\"checkbox\" name=\"checkbox_set\" class=\"checkbox_set\" value=\"$idx\"></td>
+                        <td class=\"set\"><input type=\"checkbox\" name=\"checkbox_set[]\" class=\"checkbox_set\" value=\"$idx\"></td>
                     </tr>
                 ";
             }
@@ -82,7 +82,7 @@
                         <td class=\"title\"><div class=\"button\"><a href=\"/solve_problem.php?idx=$idx\">$title</a></div></td>
                         <td class=\"category\">$category</td>
                         <td class=\"score\">$score"."점</td>
-                        <td class=\"unset\"><input type=\"checkbox\" name=\"checkbox_unset\" class=\"checkbox_unset\" value=\"$idx\"></td>
+                        <td class=\"unset\"><input type=\"checkbox\" name=\"checkbox_unset[]\" class=\"checkbox_unset\" value=\"$idx\"></td>
                     </tr>
                 ";
             }

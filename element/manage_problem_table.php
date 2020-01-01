@@ -35,7 +35,7 @@
                     <td class=\"category\">$category</td>
                     <td class=\"score\">$score"."점</td>
                     <td class=\"delete\">
-                        <input type=\"checkbox\" name=\"checkbox\" class=\"checkbox\" value=\"$idx\">
+                        <input type=\"checkbox\" name=\"checkbox[]\" class=\"checkbox\" value=\"$idx\">
                     </td>
                 </tr>
             ";
