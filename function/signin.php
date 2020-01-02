@@ -45,7 +45,7 @@
                     $stdid = SecureStringProcess($conn, $_POST['stdid']);
                     $is_manager = $row[0];
         
-                    $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$name', '$nickname', $stdid, 0, $is_manager, FALSE, NULL)";
+                    $sql = "INSERT INTO user_info VALUES('$id', '$pwd_hash', '$name', '$nickname', $stdid, $is_manager, FALSE, NULL, 0)";
                     mysqli_query($conn, $sql);
         
                     ShowAlert("가입 성공!");
