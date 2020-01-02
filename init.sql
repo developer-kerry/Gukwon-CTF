@@ -7,7 +7,7 @@ CREATE TABLE user_info(
     name VARCHAR(10) NOT NULL,
     nickname VARCHAR(16) NOT NULL PRIMARY KEY,
     stdid INT NOT NULL,
-    score TEXT NOT NULL,
+    score INT NOT NULL,
     is_manager BOOLEAN NOT NULL,
     is_superuser BOOLEAN NOT NULL,
     last_auth DATETIME
